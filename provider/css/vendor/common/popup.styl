@@ -1,0 +1,443 @@
+.item-popup.hide-popup
+  display none
+  
+.item-popup.show-popup
+  display block
+  animation-name zoomIn
+  animation-duration .3s
+  .p-product-content
+    padding-top 0
+    padding-bottom 0
+    
+.count-items
+  width 100%
+  text-align left
+  margin-top 20px
+  font-size 13px
+  padding-left 10px
+  font-family 'ubuntu-bold', sans-serif
+
+.popup-login
+  .input-error.error
+    margin-bottom 0
+  .p-rd-login
+    align-items center
+    .button-login-rd
+      width 90%
+      margin-top 2px
+  .int-content
+    border 0
+    background #fafafa
+    background #efefef
+    transition .2s all
+    .item-child
+      display flex
+      flex-direction column
+      align-items center
+    .p-login
+      background #fff
+      width 100%
+      display flex
+      flex-direction column
+      align-items center
+      padding 8px 10px
+    .item-1
+      margin-top 10px      
+      display flex
+      flex-wrap wrap
+      width 100%
+    .int-login
+      width 100%
+    .item-2
+      margin-top 10px
+    input
+      background #fff
+      height 42px
+      width 100%
+      font-size 16px
+      padding 10px
+      margin-top 15px
+      border-radius 5px
+    button
+      margin-top 15px
+    .title-type-7
+      border-bottom 0
+      justify-content center   
+      padding 0 
+    .title-1      
+      font-size 16px
+    .title-2
+      margin-top 20px
+    .line
+      position relative
+      margin-top 20px
+      &:before, &:after
+        width 45%
+        position absolute
+        content ''
+        background #ddd
+        height 1px
+        top 50%
+        transform translateY(-50%)
+      &:before
+        left 0
+      &:after
+        right 0
+  
+.item-popup
+  width 100%
+  height 100%
+  position fixed
+  top 0
+  left 0
+  background rgba(0,0,0,.6)
+  z-index 9998  
+  .title-1
+    width 100%
+    padding-bottom 8px
+    border-bottom 1px solid #dddddd
+    display flex
+    justify-content flex-start
+    align-items center
+    padding-left 10px
+    img
+      margin-right 10px
+  .close-popup
+    position absolute
+    border-radius 6px
+    font-weight bold
+    color #000
+    font-size 18px
+    right 6px
+    top 6px
+    cursor pointer
+      
+.int-content
+  min-width 415px
+  height auto
+  background #fff
+  z-index 9999
+  position absolute
+  top 47%
+  left 50%
+  transform translate(-50%, -50%)
+  border-radius 6px
+  //border 4px solid #c2e7db
+  padding 30px 25px 25px 25px
+
+.popup-mi-carrito
+  .int-content
+    width 450px
+  .item-child
+    display flex
+    flex-direction column
+    align-items center
+    padding 20px
+    .button-type-3
+      margin-top 20px
+
+.p-ubigeo-selects
+  display flex
+  flex-wrap wrap
+  width 100%
+  justify-content space-between
+  margin-top 12px
+  select
+    width calc(33.33% - 6px)
+    height 36px
+    border 1px solid #333
+
+.p-costo-envio
+  width 100%
+  background #0d0d0d
+  height 42px
+  margin-top 12px
+  color #fff
+  position relative
+  padding 10px 10px 0 10px
+  display none
+  .shipping-cost
+    margin-left 10px
+    font-weight bold
+    
+.popup-product
+  .item-quantify
+    .count
+      width 35px
+      height 27px
+      font-size 13px
+      border-width 1px
+      border-color #666
+  .add-cart-type-1
+    height 27px
+    width 24px
+    font-size 11px
+    color #666
+  .p-box-common
+    display flex
+    align-items flex-start
+    justify-content flex-start
+    position relative
+    left -10px
+  .select-type-3
+    margin-left 4px
+  .item-child
+    display flex
+    flex-direction column
+    width 100%
+    height 90%    
+    align-items center
+    padding 20px
+  .popup-body
+    width 100%
+    margin-top 8px
+    display flex
+    align-items flex-start
+    justify-content space-between
+    flex-wrap wrap
+  .p-product-img
+    width 130px
+    height 117px
+  .p-product-content
+    width calc(100% - 145px)
+  .popup-buttons
+    display flex
+    margin-top 15px
+    justify-content space-between
+    flex-wrap wrap
+    width 100%
+    .button-type-2
+      font-size 15px
+      width calc(50% - 5px)
+    .button-type-2.activate
+      opacity 1
+ 
+.p-carrito-contador
+  &:hover
+    .hover-cart
+      display block
+      visibility visible
+  .close-popup
+    position absolute
+    right 10px
+    top 8px
+    font-size 18px
+    cursor pointer
+.hover-cart
+  display none
+  visibility hidden
+  width 320px
+  position absolute
+  right -30px
+  top 20px
+  padding-top 0
+  border-top 30px solid transparent
+  z-index 1111  
+  .int-content
+    top 0
+    left 0
+    transform none
+    width 100%
+    min-width auto
+    height auto
+    border 0
+    padding 12px 24px 18px 24px
+    box-shadow 1px 2px 8px 0px lightgrey
+    &:before
+      content ''
+      display block
+      position absolute
+      width 0px
+      height 0px
+      border-left 17px solid transparent
+      border-right 17px solid transparent
+      border-bottom 32px solid #fff
+      top -24px
+      right 29px
+    .count-items
+      margin-top 8px
+      font-size 10px
+      padding-left 0
+  .title-1
+    display flex
+    align-items center
+    font-size 15px
+    color #323131
+    width 100%
+    border-bottom 1px solid #ddd
+    padding 0 6px 12px 10px
+    img
+      width 30px
+    span
+      position relative
+      top 4px
+      margin-left 10px
+  .item-quantify
+    .count
+      width 35px
+      height 27px
+      font-size 13px
+      border-width 1px
+      border-color #666
+  .add-cart-type-1
+    height 27px
+    width 24px
+    font-size 11px
+    color #666
+  .p-box-common
+    display flex
+    align-items flex-start
+    justify-content flex-start
+    position relative
+    left -10px
+  .select-type-3
+    margin-left 4px
+  .item-child
+    display block
+    width 100%
+    height 144px
+    overflow-y scroll
+    padding-bottom 15px
+    transition all .25s
+  .popup-body
+    width 100%
+    margin-top 2px
+    margin-bottom 10px
+    display flex
+    align-items flex-start
+    justify-content space-between
+    flex-wrap wrap
+  .p-product-img
+    width 91px
+    height auto
+  .p-product-content
+    width calc(100% - 100px)
+    padding 0
+    margin-top 5px
+    .title
+      color #000
+      text-transform uppercase
+      font-size 10px
+    .title-2
+      font-size 11px
+      color #515151
+      margin-top 3px
+      text-transform uppercase
+  .parent-price
+    flex-direction column
+    .parent-price-last
+      font-family "ubuntu-light", sans-serif
+    .price
+      font-size 12px
+      font-family "ubuntu-bold", sans-serif
+      margin-top 3px
+  .p-sub-total
+    background #333
+    height 34px
+    color #fff
+    display flex
+    align-items center
+    justify-content flex-end
+    padding-right 10px
+    .text-1
+      font-family "ubuntu-bold", sans-serif
+      font-size 12px
+      margin-right 10px
+    .text-2
+      font-family "ubuntu-light", sans-serif
+      font-size 14px
+  .popup-buttons
+    display flex
+    margin-top 15px
+    justify-content space-between
+    flex-wrap wrap
+    width 100%
+    .button-type-2
+      font-size 14px
+      width calc(50% - 5px)
+    .button-type-2.activate
+      opacity 1
+    .button-1
+      background transparent
+.hover-cart.show-add
+  display block
+  visibility visible
+  
+.popup-types-shipping-style-1
+  .int-content
+    position absolute    
+    width 100%
+    max-width 800px
+    padding 20px
+    background #fff
+    left 50%
+    top 44%
+    transform translate(-50%, -50%)
+    border-radius 10px
+  .item-body
+    padding 20px 20px 10px 20px
+    > div
+      margin-bottom 30px
+    h4
+      &:after
+        content ''
+        width 100%
+        height 1px
+        background lightgrey
+        display block
+        margin-top 8px
+  .item-header
+    display flex
+    align-items center
+    justify-content center
+    border-bottom 1px solid lightgrey
+    padding-bottom 20px
+    img
+      margin-right 12px
+    h3
+      font-size 16px
+      text-transform uppercase
+      font-family 'ubuntu-bold', sans-serif
+  .p-ubigeo-selects select
+    width calc(33.33% - 10px)
+    height 36px
+    border 1px solid #999
+    color #555
+    font-size 14px
+    padding 0 6px
+  .tyc-type-1
+    label
+      align-items flex-end
+
+.popup-price-shipping
+  font-size 16px
+  color #2a70fe
+
+.p-popup-button.hide
+  display none
+.p-popup-button.show
+  display block
+.p-popup-button
+  .button-type-2
+    margin 0 auto
+
+#email-user
+  border 1px solid transparent
+
+.int-pscroll
+  position absolute
+  height 100%
+  width 100%  
+  top 0
+  left 0
+
+.popup-view .int-content
+  background #fff
+
+.p-change-height .int-pscroll
+  overflow-y scroll
+
+.p-change-height .int-content
+  top 0
+  transform translateX(-50%)
+  margin 20px 0

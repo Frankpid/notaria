@@ -1,0 +1,234 @@
+@keyframes border-dance {
+  0% {
+    background-position: 0px 0px, 120px 108px, 0px 110px, 117px 0px;
+  }
+  100% {
+    background-position: 120px 0px, 0px 108px, 0px 0px, 117px 120px;
+  }
+}
+
+@keyframes flash {
+  from,
+  50%,
+  to {
+    opacity: 1;
+  }
+
+  25%,
+  75% {
+    opacity: 0;
+  }
+}
+
+@keyframes zoomIn{
+	0%{
+		opacity: 0
+		transform: scale3d(.8,.8,.8)
+	}
+	50%{
+		opacity: 1
+	}
+}
+
+@keyframes zoomOut{
+	0%{
+		opacity: 1
+	}
+	50%{
+		opacity: 0
+		transform: scale3d(.3,.3,.3)
+	}
+}
+
+@keyframes fadeOutLeft{
+	0%{
+		opacity:1
+	}
+	to{
+		opacity: 0
+		transform: translate3d(-18%,0,0)
+	}
+}
+
+@keyframes bounceInDown {
+  0% {
+    opacity: 0
+    transform: translateY(-100px)
+  }
+
+  60% {
+    opacity: 1
+    transform: translateY(5px)
+  }
+
+  80% {
+    transform: translateY(-5px)
+  }
+
+  100% {
+    transform: translateY(0)
+  }
+}
+
+@keyframes bounceInUp {
+	0% {
+		opacity: 0
+		transform: translateY(100px)
+	}
+	60% {
+		opacity: 1;
+		transform: translateY(-5px)
+	}
+	80% {
+		transform: translateY(5px)
+	}
+	100% {
+		transform: translateY(0)
+	}
+}
+
+@keyframes bounceInRight {
+	0% {
+		opacity: 0
+		transform: translateX(200px)
+	}
+
+	60% {
+		opacity: 1;
+		transform: translateX(-20px)
+	}
+
+	80% {
+		transform: translateX(10px)
+	}
+
+	100% {
+		transform: translateX(0)
+	}
+}
+
+@keyframes fadeIn {
+	0% {
+		opacity: 0
+	}
+
+	100% {
+		opacity: 1
+	}
+}
+
+@keyframes fadeOut {
+	0% {
+		opacity: 1
+	}
+
+	100% {
+		opacity: 0
+	}
+}
+
+@keyframes fadeInLeft {
+	0% {
+		opacity: 0
+		transform: translateX(-50px)
+	}
+
+	100% {
+		opacity: 1
+		transform: translateX(0)
+	}
+}
+
+
+@keyframes fadeInRight {
+  0% {
+    opacity: 0
+    transform: translateX(50px)
+  }
+
+  100% {
+    opacity: 1
+    transform: translateX(0)
+  }
+}
+
+@keyframes fadeInDown {
+	0% {
+		opacity: 0
+		transform: translateY(-50px)
+	}
+
+	100% {
+		opacity: 1
+		transform: translateY(0)
+	}
+}
+
+@keyframes fadeInUp {
+	0% {
+		opacity: 0
+		transform: translateY(50px)
+	}
+
+	100% {
+		opacity: 1
+		transform: translateY(0)
+	}
+}
+
+
+@keyframes animaFrank {
+	0%{
+		transform: translateX(-4px)
+	}
+	100%{
+		transform: translateX(4px)
+	}
+}
+
+
+
+.animated
+	animation-duration .8s
+	animation-fill-mode both
+
+.flash
+  animation-name flash
+
+.zoomIn
+	animation-name zoomIn
+
+.zoomOut
+	animation-name zoomOut
+
+.fadeOutLeft
+	animation-name fadeOutLeft
+	
+.bounceInUp
+	animation-name bounceInUp
+	
+.bounceInRight 
+	animation-name bounceInRight
+
+.fadeInLeft
+	animation-name fadeInLeft
+
+.fadeInRight
+	animation-name fadeInRight
+				
+.fadeInDown
+	animation-name fadeInDown
+
+.fadeInUp 
+	animation-name fadeInUp
+	
+.fadeIn 
+	animation-name fadeIn
+
+.fadeOut
+	animation-name fadeOut
+
+.bounceInDown
+	animation-name bounceInDown
+	
+	
