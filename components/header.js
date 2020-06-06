@@ -3,6 +3,7 @@ import Link from "next/link"
 import Navigation from "./navigation"
 import NavigationSmall from "./navigation-small"
 import HeaderTop from "./header-top"
+import Config from "../config"
 
 const Header = () =>{
 
@@ -24,7 +25,7 @@ const Header = () =>{
                     </button>
                     <div className="row between-xs middle-xs wrapper-nav">                    
                         <Link href="/">
-                            <a className="parent-logo"><img className="logo" src="./img/logo.png?v=1" /></a>
+                            <a className="parent-logo"><img className="logo" src={Config.URL + "/img/logo.png?v=1"} /></a>
                         </Link>
 
                         <div className="navigation-small-2">

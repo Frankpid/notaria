@@ -27,9 +27,10 @@ const Navigation = (props) =>{
             name: 'Servicios',
             link: '',            
             childrens: [                
-                {name: 'Asuntos No Contenciosos', link: ''},
-                {name: 'Instrumentos Protocolares 22', link: ''},
-                {name: 'Instrumentos Protocolares 4', link: ''}                
+                {name: 'Todos', link: '/servicios/todos'},                
+                {name: 'Instrumentos Protocolares', link: '/servicios/instrumentos-protocolares'},
+                {name: 'Asuntos No Contenciosos', link: '/servicios/asuntos-no-contenciosos'},
+                {name: 'Instrumentos Extra Protocolares', link: '/servicios/instrumentos-extra-protocolares'}                
             ]
         },
         {
@@ -55,8 +56,8 @@ const Navigation = (props) =>{
         },
         {
             class: '',
-            name: 'Contactos',
-            link: '/contactos',            
+            name: 'Contacto',
+            link: '/contacto',            
             childrens: [                              
             ]
         }

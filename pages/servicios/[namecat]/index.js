@@ -1,11 +1,16 @@
-import React, { useState } from 'react'
-import Slider from "react-slick"
+import React, {useEffect, useState} from 'react'
 import Link from "next/link"
-import ServiceListItem from "./services-list-item"
+import Router from 'next/router'
+import Container from "../../../components/container"
+import BreadCrumb from "../../../components/breadcrumb"
+import ServiceListItem from "../../../components/services-list-item"
+import Config from "../../../config"
+import $ from "jquery"
 
 
-const ServiceList = (props) => {
-    
+const ServicioCat = (props) => {    
+
+
     const [dataService, setDataService] = useState([
         {
             titleCat: "Instrumentos protocolares",            
@@ -115,80 +120,96 @@ const ServiceList = (props) => {
                 }
             ]
         }
-    ])  
-
-
-    const settings = {
-        dots: false,
-        infinite: true,
-        speed: 500,
-        slidesToShow: 4,
-        slidesToScroll: 2,
-        autoplay: true,
-        autoplaySpeed: 5000,
-        responsive: [
-            {
-                breakpoint: 1050,
-                settings: {
-                    slidesToShow: 3,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 720,
-                settings: {
-                    slidesToShow: 2,
-                    slidesToScroll: 1
-                }
-            },
-            {
-                breakpoint: 520,
-                settings: {
-                    slidesToShow: 1,
-                    slidesToScroll: 1
-                }
-            }
-        ]
-    }
+    ])    
 
 
     const dataCatList = dataService.map((item, index) => {
-        return <div className="box-cat">
-            <h2 className="title-cat">{item.titleCat}</h2>
-            <div className="slideshow-services slideshow-type-1">
-                <Slider key={index} {...settings}>
+        return props.currentUrl == 'todos' ?
+            <div className="box-cat">
+                <h2 className="title-cat">{item.titleCat}</h2>
+                <div className="row slideshow-type-1">            
                     { 
                         item.data.map((itemInner, index2) => {
-                            return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={"slick-item"} />
+                            return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6'} />
                         })                        
-                    }                    
-                </Slider>
-            </div>            
-        </div>
+                    }                                
+                </div>            
+            </div>
+        : props.currentUrl == item.linkCat ? 
+            <div className="box-cat" style={{marginTop: '0'}}>                
+                <div className="row slideshow-type-1">            
+                    { 
+                        item.data.map((itemInner, index2) => {
+                            return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6'} />
+                        })                        
+                    }                                
+                </div>            
+            </div>
+        : ''
     })
 
 
-    return (
-        <div className="section services-list list-type-1 services-list-style-1"> 
-            <div className="container-fluid wrapper-fluid">
-                <div className="box">
+    const doNavService = dataService.map((item, index) => {
+        return <Link href={"/servicios/" + item.linkCat}>
+            <a className={item.linkCat == props.currentUrl ? 'active' : ''}>{item.titleCat}</a>
+        </Link>                    
+    })
 
-                    <div className="parent-title">
-                        <h2 className="title">
-                            <strong>Servicios</strong> <br /> 
-                            Somos confiables, profesionales, experimentados y estamos aquí para ayudarte.
-                        </h2>
+
+    const doNavServiceMobile = dataService.map((item, index) => {
+        return  <option                     
+                    selected={item.linkCat == props.currentUrl ? true : false} 
+                    value={item.linkCat}>
+                        {item.titleCat}
+                </option>
+                             
+    })
+
+    const redirectCats = (e) => {        
+        Router.push('/servicios/' + e.target.value)
+    }
+
+
+    return (
+        <Container namePage="servicios margins-body-type-2" titlePage="Servicios"> 
+            
+            <BreadCrumb />
+            
+            <div className="section list-nav-type-1">
+                <div className="container-fluid wrapper-fluid">
+                    <div className="list-nav">
+                        <Link href="/servicios/todos">
+                            <a className={props.currentUrl == 'todos' ? 'active' : ''}>Ver Todos</a>
+                        </Link>
+                        {doNavService}
                     </div>
-                    
-                    {dataCatList}
-                    
-                    <Link href="/tramites-en-linea">
-                        <a className="btn-formalities">Ver todos los trámites en línea</a>
-                    </Link>
+
+                    <div className="list-nav mobile">
+                        <select onChange={e=>redirectCats(e)}>
+                            <option value='todos' selected={props.currentUrl == 'todos' ? true : false}>Ver Todos</option>
+                            {doNavServiceMobile}
+                        </select>
+                    </div>
+                </div>
+            </div>            
+
+
+            <div className="section services-list-style-1 margin-type-1"> 
+                <div className="container-fluid wrapper-fluid">                               
+                    {dataCatList}                                       
                 </div>
             </div>
-        </div>
+            
+
+        </Container>
     )
 }
 
-export default ServiceList
+
+ServicioCat.getInitialProps = async (ctx) => {    
+    return {currentUrl: ctx.query.namecat}
+}
+
+
+
+export default ServicioCat

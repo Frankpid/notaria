@@ -145,7 +145,7 @@ const Footer = () => {
                                         <div className="accordion-item">
                                             <button className="accordion-button" onClick={() => setShow('acc1')}>
                                                 <span>Instrumentos protocolares</span>
-                                                <i className="icon icon-arrow-down-small-2"></i>
+                                                <i className="icons icon-arrow-down-small-2"></i>
                                             </button>
 
                                             {showAccordionData.accordionItem == 'acc1' && (
@@ -167,7 +167,7 @@ const Footer = () => {
                                         <div className="accordion-item">
                                             <button className="accordion-button" onClick={() => setShow('acc2')}>
                                                 <span>Asuntos no contenciosos</span>
-                                                <i className="icon icon-arrow-down-small-2"></i>
+                                                <i className="icons icon-arrow-down-small-2"></i>
                                             </button>
 
                                             {showAccordionData.accordionItem == 'acc2' && (

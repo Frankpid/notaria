@@ -1,9 +1,18 @@
+import React, {useEffect, useState} from 'react'
 import Container from "../components/container"
+import MissionVision from "../components/nuestra-notaria/mission-vision"
+import OurValues from "../components/nuestra-notaria/our-values"
+import BreadCrumb from "../components/breadcrumb"
 
 
-const Index = () => {
+const OurNotary = () => {
+
+
     return (
-        <Container namePage="nuestra-notaria" titlePage="Nuestra Notaria">
+        <Container namePage="nuestra-notaria margins-body-type-1" titlePage="Nuestra Notaria"> 
+
+            <BreadCrumb />
+
             <div className="section snt-1">
                 <div className="container-fluid wrapper-fluid">
                     <div className="row">
@@ -21,7 +30,7 @@ const Index = () => {
             <div className="section snt-2">
                 <div className="container-fluid wrapper-fluid">
                     <div className="row end-xs">
-                        <div className="caption caption-static caption-type-1 caption-type-2 col-md-6 start-xs">
+                        <div className="caption caption-static caption-type-1 caption-type-2 col-md-6 start-xs equal-margin-1">
                             <div className="parent-title-2">
                                 <h2><strong>Manuel A. Román Olivas</strong> <br />Notario</h2>
                             </div>                            
@@ -30,9 +39,12 @@ const Index = () => {
                     </div>
                 </div>
             </div>
+
+            <MissionVision />
+            <OurValues />
         </Container>
     )
 }
 
 
-export default Index
+export default OurNotary

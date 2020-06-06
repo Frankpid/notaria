@@ -5,6 +5,7 @@ import ServicesList from "../components/services-list"
 import Appointment from "../components/appointment"
 import Accounts from "../components/accounts"
 import Confidence from "../components/confidence"
+import ContactForm from "../components/contacto/form"
 
 
 const Index = () => {
@@ -16,6 +17,7 @@ const Index = () => {
             <Appointment />
             <Accounts />
             <Confidence />
+            <ContactForm />
         </Container>
     )
 }
