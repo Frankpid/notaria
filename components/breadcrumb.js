@@ -9,9 +9,7 @@ const BreadCrumb = (props) => {
 
         let 
         url = window.location.href,
-        urlArr = url.split('/')
-
-        console.log(urlArr)
+        urlArr = url.split('/')        
         
         setShowBreadCrumb(urlArr)
 
@@ -34,7 +32,7 @@ const BreadCrumb = (props) => {
                     }
 
                     {showBreadcrumb[3] &&
-                        <Link href={showBreadcrumb[3] == 'servicios' ? '/servicios/todos' : showBreadcrumb[3]}>
+                        <Link href={showBreadcrumb[3] == 'servicios' ? '/servicios/todos' : showBreadcrumb[3] == 'tramites-en-linea' ? '/tramites-en-linea/autorizacion-de-viaje' :  showBreadcrumb[3]}>
                             <a className="bci-next">
                                 <i className="icons icon-right-small-2"></i>
                                 <span>{showBreadcrumb[3] == 'servicios' ? 'Servicios' : showBreadcrumb[3].replace(/-/gi, ' ')}</span>

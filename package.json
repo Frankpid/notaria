@@ -26,7 +26,8 @@
     "react-flexbox-grid": "^2.1.2",
     "react-hook-form": "^5.7.2",
     "react-html-parser": "^2.0.2",
-    "save-dev": "0.0.1-security"
+    "save-dev": "0.0.1-security",
+    "yup": "^0.29.1"
   },
   "devDependencies": {
     "react": "^16.13.1",

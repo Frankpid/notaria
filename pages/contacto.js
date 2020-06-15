@@ -8,13 +8,14 @@ import Form from "../components/contacto/form"
 
 const Contacto = () => {
 
+
     return (
         <Container namePage="contacto" titlePage="Contacto"> 
             
             <div className="wrap-contact with-bg-img" style={{backgroundImage: `url(../../img/bg-contact.jpg?v=1)`}}>
                 <BreadCrumb class="color-type-2" />
 
-                <Form />
+                <Form width="col-md-11" />
 
             </div>
             

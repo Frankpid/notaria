@@ -8,14 +8,18 @@ const ServiceListItem = (props) => {
     return (              
         <div className={props.class}> 
             <div className="wrapper-children">
-                <img src={Config.URL + "/img/service-img.jpg?v=2"} alt={props.data.description} />
+                <Link href={props.link}>
+                    <a>
+                        <img src={Config.URL + "/img/service-img.jpg?v=2"} alt={props.data.description} />
+                    </a>
+                </Link>
                 <div className="caption">
                     <div>                                        
-                        <div className="parent-title-2">                                             
-                            {ReactHtmlParser(props.data.title)}
-                        </div>
+                        <div className="parent-title-2"><h2>{props.data.title}</h2></div>
                         <p className="description">{props.data.description}</p>
-                        <a className="button-link" href={props.link}>Solicitar servicio</a>
+                        <Link href={props.link}>
+                            <a className="button-link">Solicitar servicio</a>
+                        </Link>
                     </div>
                 </div>
             </div>                                

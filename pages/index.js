@@ -17,7 +17,7 @@ const Index = () => {
             <Appointment />
             <Accounts />
             <Confidence />
-            <ContactForm />
+            <ContactForm width="col-md-12" />
         </Container>
     )
 }

@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Slider from "react-slick"
 
-const Slideshow = (props) =>{
+const Slideshow = (props) => {
 
     const settings = {
         dots: false,
@@ -14,6 +14,7 @@ const Slideshow = (props) =>{
     return (
         <div className="slideshow-main">
             <Slider {...settings}>
+
                 <div className="slick-item"> 
                     <div className="img" style={{ backgroundImage: `url("../../img/banner.jpg")` }}></div>
                     <div className="caption caption-type-1 container-fluid wrapper-fluid flex center-xs">
@@ -27,6 +28,7 @@ const Slideshow = (props) =>{
                         </div>
                     </div>
                 </div>
+
                 <div className="slick-item">
                     <div className="img" style={{ backgroundImage: `url("../../img/banner.jpg")` }}></div>
                     <div className="caption caption-type-1 container-fluid wrapper-fluid flex center-xs">
@@ -40,6 +42,7 @@ const Slideshow = (props) =>{
                         </div>
                     </div>
                 </div>
+
                 <div className="slick-item">
                     <div className="img" style={{ backgroundImage: `url("../../img/banner.jpg")` }}></div>
                     <div className="caption caption-type-1 container-fluid wrapper-fluid flex center-xs">
@@ -53,6 +56,7 @@ const Slideshow = (props) =>{
                         </div>
                     </div>
                 </div>
+
             </Slider>
         </div>
     )

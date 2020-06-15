@@ -17,32 +17,32 @@ const ServicioCat = (props) => {
             linkCat: 'instrumentos-protocolares',
             data: [
                 {
-                    title: ['<h2>Instrumentos Protocolares 1</h2>'],
+                    title: ['Instrumentos Protocolares 1'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-protocolares-1'
                 },
                 {
-                    title: ['<h2>Instrumentos Protocolares 2</h2>'],
+                    title: ['Instrumentos Protocolares 2'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-protocolares-2'
                 },
                 {
-                    title: ['<h2>Instrumentos Protocolares 3</h2>'],
+                    title: ['Instrumentos Protocolares 3'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-protocolares-3'
                 },
                 {
-                    title: ['<h2>Instrumentos Protocolares 4</h2>'],
+                    title: ['Instrumentos Protocolares 4'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-protocolares-4'
                 },
                 {
-                    title: ['<h2>Instrumentos Protocolares 5</h2>'],
+                    title: ['Instrumentos Protocolares 5'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-protocolares-5'
                 },
                 {
-                    title: ['<h2>Instrumentos Protocolares 6</h2>'],
+                    title: ['Instrumentos Protocolares 6'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-protocolares-6'
                 }
@@ -53,32 +53,32 @@ const ServicioCat = (props) => {
             linkCat: 'asuntos-no-contenciosos',
             data: [
                 {
-                    title: ['<h2>Asuntos no contenciosos 1</h2>'],
+                    title: ['Asuntos no contenciosos 1'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'asuntos-no-contenciosos-1'
                 },
                 {
-                    title: ['<h2>Asuntos no contenciosos 2</h2>'],
+                    title: ['Asuntos no contenciosos 2'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'asuntos-no-contenciosos-2'
                 },
                 {
-                    title: ['<h2>Asuntos no contenciosos 3</h2>'],
+                    title: ['Asuntos no contenciosos 3'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'asuntos-no-contenciosos-3'
                 },
                 {
-                    title: ['<h2>Asuntos no contenciosos 4</h2>'],
+                    title: ['Asuntos no contenciosos 4'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'asuntos-no-contenciosos-4'
                 },
                 {
-                    title: ['<h2>Asuntos no contenciosos 5</h2>'],
+                    title: ['Asuntos no contenciosos 5'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'asuntos-no-contenciosos-5'
                 },
                 {
-                    title: ['<h2>Asuntos no contenciosos 6</h2>'],
+                    title: ['Asuntos no contenciosos 6'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'asuntos-no-contenciosos-6'
                 }
@@ -89,38 +89,58 @@ const ServicioCat = (props) => {
             linkCat: 'instrumentos-extra-protocolares',
             data: [
                 {
-                    title: ['<h2>Instrumentos Extra Protocolares 1</h2>'],
+                    title: ['Instrumentos Extra Protocolares 1'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-extra-protocolares-1'
                 },
                 {
-                    title: ['<h2>Instrumentos Extra Protocolares 2</h2>'],
+                    title: ['Instrumentos Extra Protocolares 2'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-extra-protocolares-2'
                 },
                 {
-                    title: ['<h2>Instrumentos Extra Protocolares 3</h2>'],
+                    title: ['Instrumentos Extra Protocolares 3'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-extra-protocolares-3'
                 },
                 {
-                    title: ['<h2>Instrumentos Extra Protocolares 4</h2>'],
+                    title: ['Instrumentos Extra Protocolares 4'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-extra-protocolares-4'
                 },
                 {
-                    title: ['<h2>Instrumentos Extra Protocolares 5</h2>'],
+                    title: ['Instrumentos Extra Protocolares 5'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-extra-protocolares-5'
                 },
                 {
-                    title: ['<h2>Instrumentos Extra Protocolares 6</h2>'],
+                    title: ['Instrumentos Extra Protocolares 6'],
                     description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
                     linkCat: 'instrumentos-extra-protocolares-6'
                 }
             ]
         }
     ])    
+
+    
+    
+
+    useEffect(() => { 
+        
+        function searchInObject(nameKey, myArray){
+            for (var i=0; i < myArray.length; i++) {
+                if (myArray[i].linkCat === nameKey) {
+                    return true
+                }
+            }
+        }
+        
+        if( props.currentUrl != 'todos' ){
+            let verifyUrl = searchInObject(props.currentUrl, dataService)
+            !verifyUrl && (Router.push('/'))
+        }
+
+    }, [])
 
 
     const dataCatList = dataService.map((item, index) => {
@@ -145,7 +165,7 @@ const ServicioCat = (props) => {
                     }                                
                 </div>            
             </div>
-        : ''
+        : ""
     })
 
 
@@ -164,6 +184,7 @@ const ServicioCat = (props) => {
                 </option>
                              
     })
+
 
     const redirectCats = (e) => {        
         Router.push('/servicios/' + e.target.value)
@@ -196,7 +217,7 @@ const ServicioCat = (props) => {
 
             <div className="section services-list-style-1 margin-type-1"> 
                 <div className="container-fluid wrapper-fluid">                               
-                    {dataCatList}                                       
+                    {dataCatList}
                 </div>
             </div>
             

@@ -3,41 +3,36 @@ import Slider from "react-slick"
 import Link from "next/link"
 import FormalitiesListItem from "./formalities-list-item"
 
-const FortilitiesList = (props) =>{
 
+const FortilitiesList = (props) => {
 
     const [dataFormalities, setDataFormalities] = useState([
         {
-            title: ['<h2>Tramites <br /><strong>lorem imsup</strong></h2>'],
+            title: 'Autorización de viaje',
             description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: '#'
+            link: 'autorizacion-de-viaje'
         },
         {
-            title: ['<h2>Tramites <br /><strong>lorem imsup</strong></h2>'],
+            title: 'Constitución de empresas',
             description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: '#'
+            link: 'constitucion-de-empresas'
         },
         {
-            title: ['<h2>Tramites <br /><strong>lorem imsup</strong></h2>'],
+            title: 'Poderes',
             description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: '#'
+            link: 'poderes'
         },
         {
-            title: ['<h2>Tramites <br /><strong>lorem imsup</strong></h2>'],
+            title: 'Transferencias inmobiliarias',
             description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: '#'
+            link: 'transferencias-inmobiliarias'
         },
         {
-            title: ['<h2>Tramites <br /><strong>lorem imsup</strong></h2>'],
+            title: 'Transferencias vehiculares',
             description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: '#'
-        },
-        {
-            title: ['<h2>Tramites <br /><strong>lorem imsup</strong></h2>'],
-            description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: '#'
-        }
-    ])
+            link: 'transferencias-vehiculares'
+        }        
+    ]) 
 
 
     const settings = {
@@ -97,7 +92,7 @@ const FortilitiesList = (props) =>{
                         </Slider>
                     </div>
                     
-                    <Link href="/tramites-en-linea">
+                    <Link href="/tramites-en-linea/autorizacion-de-viaje">
                         <a className="btn-formalities">Ver todos los trámites en línea</a>
                     </Link>
                 </div>

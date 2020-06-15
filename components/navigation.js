@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useState, useEffect } from 'react'
 import NavigationItem from "./navigation-item"
 
 const Navigation = (props) =>{
@@ -15,17 +15,19 @@ const Navigation = (props) =>{
         {
             class: '',
             name: 'Tramites en linea',
-            link: '',            
+            link: '/tramites-en-linea',            
             childrens: [                
-                {name: 'Asuntos No Contenciosos 31', link: ''},
-                {name: 'Instrumentos Protocolares', link: ''},
-                {name: 'Instrumentos Protocolares 2', link: ''}                
+                {name: 'Autorización de viaje', link: '/tramites-en-linea/autorizacion-de-viaje'},
+                {name: 'Constitución de empresas', link: '/tramites-en-linea/constitucion-de-empresas'},
+                {name: 'Poderes', link: '/tramites-en-linea/poderes'},
+                {name: 'Transferencias inmobiliarias', link: '/tramites-en-linea/transferencias-inmobiliarias'},
+                {name: 'Transferencias vehiculares', link: '/tramites-en-linea/transferencias-vehiculares'} 
             ]
         },
         {
             class: '',
             name: 'Servicios',
-            link: '',            
+            link: '/servicios',            
             childrens: [                
                 {name: 'Todos', link: '/servicios/todos'},                
                 {name: 'Instrumentos Protocolares', link: '/servicios/instrumentos-protocolares'},
@@ -64,7 +66,37 @@ const Navigation = (props) =>{
     ])
 
 
-    const mapData = navOptions.map((item, index) => {return <NavigationItem key={index} class={item.class} name={item.name} link={item.link} childrens={item.childrens} />})        
+    const [currentActive, setCurrentActive] = useState(false)
+
+
+    useEffect(() => {   
+
+        function searchInObject(nameKey, myArray){
+            for (var i=0; i < myArray.length; i++) {
+                if (myArray[i].link === nameKey) {
+                    return true
+                }
+            }
+        }
+
+        function searchInMultiObject(nameKey, myArray){
+            for (var i=0; i < myArray.length; i++) {
+                for (var j = 0; j < myArray[i].childrens.length; j++) {
+                    if (myArray[i][j].link === nameKey) {
+                        return myArray[i][j].link
+                    }
+                }
+            }
+        }
+
+        let arrCurrentPath = window.location.href.split('/')
+        
+        setCurrentActive(arrCurrentPath[3])
+
+    }, [])
+
+
+    const mapData = navOptions.map((item, index) => {return <NavigationItem classActive={item.link == '/'+currentActive ? 'active' : ''} key={index} class={item.class} name={item.name} link={item.link} childrens={item.childrens} />})        
 
 
     return (

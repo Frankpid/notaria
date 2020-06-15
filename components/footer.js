@@ -139,7 +139,7 @@ const Footer = () => {
                             </div>
                             <div className="col-xs-12 col-sm-4 col-md-4 do-line">
                                 <div className="footer-list-style-1">
-                                    <h2 className="title">Trámites en línea</h2>
+                                    <h2 className="title">Servicios</h2>
                                     <div className="list-footer formalities-list-footer accordion">  
 
                                         <div className="accordion-item">
