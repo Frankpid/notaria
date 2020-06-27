@@ -15,7 +15,7 @@ const FortilitiesListItem = (props) =>{
                     </div>
                     <p className="description">{props.data.description}</p>
                     <Link href={'tramites-en-linea/' + props.data.link}>
-                        <a className="button-link">Solicitar servicio</a>
+                        <a className="button-link">Solicitar trámite</a>
                     </Link>                    
                 </div>
             </div>

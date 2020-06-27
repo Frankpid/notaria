@@ -7,122 +7,13 @@ import ServiceListItem from "../../../../components/services-list-item"
 import Config from "../../../../config"
 import Detail from "../../../../components/detail"
 import FormalitiesList from "../../../../components/formalities-list"
+import axios from "axios"
 
 
 const ServicioCat = (props) => {    
     
-    
-    const [dataService, setDataService] = useState([
-        {
-            titleCat: "Instrumentos protocolares",            
-            linkCat: 'instrumentos-protocolares',
-            data: [
-                {
-                    title: ['Instrumentos Protocolares 1'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-protocolares-1'
-                },
-                {
-                    title: ['Instrumentos Protocolares 2'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-protocolares-2'
-                },
-                {
-                    title: ['Instrumentos Protocolares 3'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-protocolares-3'
-                },
-                {
-                    title: ['Instrumentos Protocolares 4'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-protocolares-4'
-                },
-                {
-                    title: ['Instrumentos Protocolares 5'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-protocolares-5'
-                },
-                {
-                    title: ['Instrumentos Protocolares 6'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-protocolares-6'
-                }
-            ]
-        },
-        {
-            titleCat: "Asuntos no contenciosos",            
-            linkCat: 'asuntos-no-contenciosos',
-            data: [
-                {
-                    title: ['Asuntos no contenciosos 1'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'asuntos-no-contenciosos-1'
-                },
-                {
-                    title: ['Asuntos no contenciosos 2'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'asuntos-no-contenciosos-2'
-                },
-                {
-                    title: ['Asuntos no contenciosos 3'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'asuntos-no-contenciosos-3'
-                },
-                {
-                    title: ['Asuntos no contenciosos 4'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'asuntos-no-contenciosos-4'
-                },
-                {
-                    title: ['Asuntos no contenciosos 5'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'asuntos-no-contenciosos-5'
-                },
-                {
-                    title: ['Asuntos no contenciosos 6'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'asuntos-no-contenciosos-6'
-                }
-            ]
-        },
-        {
-            titleCat: "Instrumentos extra protocolares",            
-            linkCat: 'instrumentos-extra-protocolares',
-            data: [
-                {
-                    title: ['Instrumentos Extra Protocolares 1'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-extra-protocolares-1'
-                },
-                {
-                    title: ['Instrumentos Extra Protocolares 2'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-extra-protocolares-2'
-                },
-                {
-                    title: ['Instrumentos Extra Protocolares 3'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-extra-protocolares-3'
-                },
-                {
-                    title: ['Instrumentos Extra Protocolares 4'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-extra-protocolares-4'
-                },
-                {
-                    title: ['Instrumentos Extra Protocolares 5'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-extra-protocolares-5'
-                },
-                {
-                    title: ['Instrumentos Extra Protocolares 6'],
-                    description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-                    linkCat: 'instrumentos-extra-protocolares-6'
-                }
-            ]
-        }
-    ])   
-
+    const [dataService, setDataService] = useState(props.listServiciosShort) 
+    const [dataTramite, setDataTramite] = useState([])  
 
     const dataCurrent = <>
         <div className="header-parent-title flex middle-xs between-md">        
@@ -167,7 +58,15 @@ const ServicioCat = (props) => {
     </>
 
 
-    useEffect(() => {        
+    useEffect(() => {      
+        
+        const getTramiteShort = async () => {
+            const dataTramite = await axios(Config.API_PATH + '/tramite-short')
+            setDataTramite(dataTramite.data)
+        }     
+        
+        getTramiteShort()
+        
         function searchInObject(nameKey, myArray){
             for (var i=0; i < myArray.length; i++) {
                 if (myArray[i].linkCat === nameKey) {
@@ -193,10 +92,11 @@ const ServicioCat = (props) => {
             let verifyCurrentUrl = searchInMultiObject(props.currentUrl, dataService)
             !verifyCurrentUrl && (Router.push('/'))
         }
-    })
+
+    }, [])
 
 
-    const doNavLateral = dataService.map((item, index) => {
+    const doNavLateral = dataService && dataService.map((item, index) => {
         return <div key={index} className={"item item-"+index}>
             <h2 className="title-list-detail">{item.titleCat}</h2>
             <div className="data-list-detail">
@@ -218,17 +118,19 @@ const ServicioCat = (props) => {
 
             <Detail class={"detail-style-1 service-detail"} dataList={doNavLateral} dataContent={dataCurrent} />
 
-            <FormalitiesList />
+            <FormalitiesList data={dataTramite} />
 
         </Container>
     )
 }
 
 
-ServicioCat.getInitialProps = async (ctx) => {    
+ServicioCat.getInitialProps = async (ctx) => { 
+    const getServiciosShort = await axios(Config.API_PATH + '/servicios-short')   
     return {
         catNameUrl: ctx.query.namecat,
-        currentUrl: ctx.query.detalle
+        currentUrl: ctx.query.detalle,
+        listServiciosShort: getServiciosShort.data.listCategoriasShort
     }
 }
 

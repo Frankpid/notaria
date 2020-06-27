@@ -6,18 +6,22 @@ import BreadCrumb from "../../components/breadcrumb"
 import Config from "../../config"
 import Detail from "../../components/detail"
 import FormalitiesList from "../../components/formalities-list"
+import axios from "axios"
 
 import AutorizacionDeViaje from "../../components/tramites-forms/autorizacion-de-viaje"
+import ConstitucionEmpresa from "../../components/tramites-forms/constitucion-de-empresas"
+import Poderes from "../../components/tramites-forms/poderes"
+import TransferenciaInmobiliaria from "../../components/tramites-forms/transferencia-inmobiliaria"
+import TransferenciaVehicular from "../../components/tramites-forms/transferencia-vehicular"
 
 
 const TramitePage = (props) => {    
-    
     
     const [dataTramite, setDataTramite] = useState([
         {
             titleCat: "Autorización de viaje",            
             linkCat: 'autorizacion-de-viaje',
-            formBody: <AutorizacionDeViaje width="col-md-9" />,
+            formBody: <AutorizacionDeViaje key={1} width="col-xs-12 col-md-9" />,
             data: [
                 
             ]
@@ -25,6 +29,7 @@ const TramitePage = (props) => {
         {
             titleCat: "Constitución de empresas",            
             linkCat: 'constitucion-de-empresas',
+            formBody: <ConstitucionEmpresa key={2} width="col-xs-12 col-md-9" />,
             data: [
                 
             ]
@@ -32,6 +37,7 @@ const TramitePage = (props) => {
         {
             titleCat: "Poderes",            
             linkCat: 'poderes',
+            formBody: <Poderes key={2} width="col-xs-12 col-md-9" />,
             data: [
                 
             ]
@@ -39,6 +45,7 @@ const TramitePage = (props) => {
         {
             titleCat: "Transferencias inmobiliarias",            
             linkCat: 'transferencias-inmobiliarias',
+            formBody: <TransferenciaInmobiliaria key={2} width="col-xs-12 col-md-9" />,            
             data: [
                 
             ]
@@ -46,12 +53,14 @@ const TramitePage = (props) => {
         {
             titleCat: "Transferencias vehiculares",            
             linkCat: 'transferencias-vehiculares',
+            formBody: <TransferenciaVehicular key={2} width="col-xs-12 col-md-9" />,            
             data: [
                 
             ]
         }
     ])   
 
+    const [verifyPage, setVerifyPage] = useState(false)
 
     useEffect(() => {        
         function searchInObject(nameKey, myArray){
@@ -65,6 +74,7 @@ const TramitePage = (props) => {
         
         if( props.currentUrl != 'todos' ){
             let verifyCatUrl = searchInObject(props.currentUrl, dataTramite)
+            setVerifyPage(verifyCatUrl)
             !verifyCatUrl && (Router.push('/'))
         }
     })
@@ -77,9 +87,9 @@ const TramitePage = (props) => {
         <div className={"item item-1"}>
             <h2 className="title-list-detail">Trámites en linea</h2>
             <div className="data-list-detail">
-                {dataTramite.map((item, index) => {
-                    return <Link key={index} href={item.linkCat}>
-                        <a className={props.currentUrl == item.linkCat ? "active" : ""}>{item.titleCat}</a>
+                {props.listTramiteShort != undefined && props.listTramiteShort.map((item, index) => {
+                    return <Link key={index} href={item.link}>
+                        <a className={props.currentUrl == item.link ? "active" : ""}>{item.title}</a>
                     </Link> 
                 })}
             </div>
@@ -90,20 +100,24 @@ const TramitePage = (props) => {
 
     return (
         <Container namePage="tramites inner margins-body-type-2" titlePage="Servicios">              
-            
+
             <BreadCrumb />            
 
-            <Detail class={"detail-style-1 service-detail"} dataList={doNavLateral} dataContent={dataCurrent[0].formBody} />
-
+            {verifyPage && (
+                <Detail class={"detail-style-1 service-detail"} dataList={doNavLateral} dataContent={dataCurrent[0].formBody} />
+            )}              
 
         </Container>
     )
 }
 
 
-TramitePage.getInitialProps = async (ctx) => {    
+TramitePage.getInitialProps = async (ctx) => { 
+    const result = await axios(Config.API_PATH + '/tramite-short')
+    //console.log(result.data)    
     return {
-        currentUrl: ctx.query.tramitePage
+        currentUrl: ctx.query.tramitePage,
+        listTramiteShort: result.data.listTramite
     }
 }
 

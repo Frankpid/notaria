@@ -9,7 +9,6 @@ const Header = () =>{
 
     const [handleTogglenav, setHandleToggleNav] = useState({class: 'nav-hide'})
 
-
     const toggleNav = () => {
         const toggleClass = handleTogglenav.class == 'nav-hide' ? 'nav-show' : 'nav-hide'
         setHandleToggleNav({class: toggleClass})

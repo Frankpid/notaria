@@ -3,7 +3,7 @@
         label
             color #000
             margin-bottom 6px
-            display flex
+            display inline-block
         .box-form
             margin-top 15px
         .fi-validator
@@ -14,7 +14,7 @@
         .button
             font-family "apercu-bold",sans-serif
             background colorBtnSlider
-            margin-top 30px
+            margin-top 50px
     
     .form-text-line
         font-size 15px
@@ -30,4 +30,56 @@
             margin-right 18px
             &:first-child                
                 width 230px
+
+
+
+.g-form-col-2-type-1    
+    .box-form
+        &:last-child
+            margin-right 0
+
+
+
+.payment-method-form
+    .item
+        display flex
+        align-items flex-start
+        flex-wrap wrap
+        margin-top 25px
+        p  
+            font-size 15px
+        img
+            display block
+            margin-right 30px
+        div
+            width calc(100% - 110px)   
+            position relative
+            top -2px    
+    .item-2
+        margin-top 30px
+    
+    .parent-list
+        padding-left 110px
+        margin-top 20px
+        li  
+            display flex
+            flex-direction column
+            color #000
+            position relative
+            padding 0 0 0 14px
+            margin-bottom 6px
+            font-size 15px
+            strong
+                margin-top 4px
+            &:before
+                content ""
+                display block
+                width 5px
+                height 5px
+                background #e6902b
+                border-radius 50%
+                position absolute
+                top 5px
+                left 0
+             
 

@@ -6,6 +6,7 @@ import Config from "../config"
 
 
 const Container = (props) => {    
+    //console.log(props)
     return (
         <div className="body-main">
             <Head>

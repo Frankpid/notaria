@@ -84,10 +84,11 @@ const Form = (props) => {
         alert(JSON.stringify(data))
     }
     
+    
     const triggerClosePopup = () => {
         setShowForm(false)
     }
-    
+
 
     return (
 

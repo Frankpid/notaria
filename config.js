@@ -4,6 +4,7 @@ const envm = process.env.NODE_ENV
 if( envm === "development" ){
 	dataConfig = {
 		"URL": "http://localhost:3000",
+		"URL_BACK": "http://localhost:4000",
 		"PORT": 4000,
 		"NODE_ENV": "development",
 		"DB_HOST": "localhost",
@@ -15,11 +16,13 @@ if( envm === "development" ){
 		"FB_APP_SECRET": "",
 		"GOOGLE_CLIENT_ID": "",
 		"GOOGLE_CLIENT_SECRET": "",
-		"SECURE": false
+		"SECURE": false,
+		"API_PATH": "http://localhost:4000/getapi"
 	}
 }else{	
 	dataConfig = {
-		"URL": "https://notaria.now.sh",
+		"URL": "http://142.93.3.176:3000",
+		"URL_BACK": "http://142.93.3.176:3001",
 		"PORT": 3000,
 		"NODE_ENV": "production",
 		"DB_HOST": "localhost",
@@ -31,7 +34,8 @@ if( envm === "development" ){
 		"FB_APP_SECRET": "",
 		"GOOGLE_CLIENT_ID": "",
 		"GOOGLE_CLIENT_SECRET": "",
-		"SECURE": true
+		"SECURE": true,
+		"API_PATH": "http://142.93.3.176:3001/getapi"
 	}
 }
 

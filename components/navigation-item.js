@@ -49,7 +49,7 @@ const NavigationItem = (props) => {
 
 
     const subNavList = navItems.map((currentElem, index) => {
-        return <Link href={currentElem.link}>
+        return <Link key={index} href={currentElem.link}>
             <a>{currentElem.name}</a>
         </Link>
     })

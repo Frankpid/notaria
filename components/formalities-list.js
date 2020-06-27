@@ -6,34 +6,7 @@ import FormalitiesListItem from "./formalities-list-item"
 
 const FortilitiesList = (props) => {
 
-    const [dataFormalities, setDataFormalities] = useState([
-        {
-            title: 'Autorización de viaje',
-            description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: 'autorizacion-de-viaje'
-        },
-        {
-            title: 'Constitución de empresas',
-            description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: 'constitucion-de-empresas'
-        },
-        {
-            title: 'Poderes',
-            description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: 'poderes'
-        },
-        {
-            title: 'Transferencias inmobiliarias',
-            description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: 'transferencias-inmobiliarias'
-        },
-        {
-            title: 'Transferencias vehiculares',
-            description: 'Lorem Ipsum is simply dummy text of the printing loren ipsum loren ipsum simply dummy text of the.',
-            link: 'transferencias-vehiculares'
-        }        
-    ]) 
-
+    const [dataFormalities, setDataFormalities] = useState(props.data) 
 
     const settings = {
         dots: false,
@@ -67,7 +40,6 @@ const FortilitiesList = (props) => {
             }
         ]
     }
-
 
     const dataList = dataFormalities.map((item, index)=>{
         return <FormalitiesListItem key={index} data={item} />

@@ -1,7 +1,11 @@
 import React, { useState } from 'react'
 import Slider from "react-slick"
+import Link from "next/link"
+import ReactHtmlParser from 'react-html-parser'
+import Config from "../config"
 
 const Slideshow = (props) => {
+    //console.log(props)
 
     const settings = {
         dots: false,
@@ -14,49 +18,24 @@ const Slideshow = (props) => {
     return (
         <div className="slideshow-main">
             <Slider {...settings}>
-
-                <div className="slick-item"> 
-                    <div className="img" style={{ backgroundImage: `url("../../img/banner.jpg")` }}></div>
-                    <div className="caption caption-type-1 container-fluid wrapper-fluid flex center-xs">
-                        <div className="col-xs-10 col-sm-10 col-md-10">
-                            <h3 className="title-1">Servicios en linea</h3>
-                            <div className="parent-title-2">
-                                <h2>¿Constitución de empresa <br /><strong>sin salir de casa?</strong></h2>
+                {props.data.map((item, index) => {
+                    const img = item.object_img.length>2 ? item.folder_name + '/' + JSON.parse(item.object_img)[0] : ''
+                    return <div key={index} className="slick-item"> 
+                        <div className="img" style={{ backgroundImage: `url(${Config.URL_BACK + '/uploads/'+ img})` }}></div>
+                        <div className="caption caption-type-1 container-fluid wrapper-fluid flex center-xs">
+                            <div className="col-xs-10 col-sm-10 col-md-10">
+                                <h3 className="title-1">{item.tipo_servicio}</h3>
+                                <div className="parent-title-2">
+                                    {ReactHtmlParser(item.object_titulo)}
+                                </div>
+                                <p className="description">{item.descripcion}</p>
+                                <Link href={item.button_link}>
+                                    <a className="button-link">{item.button_name}</a>
+                                </Link>
                             </div>
-                            <p className="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
-                            <a className="button-link" href="#">Solicitar servicio</a>
                         </div>
                     </div>
-                </div>
-
-                <div className="slick-item">
-                    <div className="img" style={{ backgroundImage: `url("../../img/banner.jpg")` }}></div>
-                    <div className="caption caption-type-1 container-fluid wrapper-fluid flex center-xs">
-                        <div className="col-xs-10 col-sm-10 col-md-10">
-                            <h3 className="title-1">Servicios en linea</h3>
-                            <div className="parent-title-2">
-                                <h2>¿Constitución de empresa <br /><strong>sin salir de casa?</strong></h2>
-                            </div>
-                            <p className="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
-                            <a className="button-link" href="#">Solicitar servicio</a>
-                        </div>
-                    </div>
-                </div>
-
-                <div className="slick-item">
-                    <div className="img" style={{ backgroundImage: `url("../../img/banner.jpg")` }}></div>
-                    <div className="caption caption-type-1 container-fluid wrapper-fluid flex center-xs">
-                        <div className="col-xs-10 col-sm-10 col-md-10">
-                            <h3 className="title-1">Servicios en linea</h3>
-                            <div className="parent-title-2">
-                                <h2>¿Constitución de empresa <br /><strong>sin salir de casa?</strong></h2>
-                            </div>
-                            <p className="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled.</p>
-                            <a className="button-link" href="#">Solicitar servicio</a>
-                        </div>
-                    </div>
-                </div>
-
+                })}                
             </Slider>
         </div>
     )

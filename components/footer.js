@@ -1,11 +1,16 @@
 import Link from "next/link"
 import React, {useState, useEffect} from "react"
+import axios from "axios"
+import Api from "../config"
 
 
 const Footer = () => {
 
-
     const [showAccordionData, setShowAccodionData] = useState({accordionItem: null})
+
+    const [dataTramiteList, setDataTramiteList] = useState([])
+
+    const [dataServicioList, setDataServicioList] = useState([])
 
 
     useEffect(() => {
@@ -63,6 +68,17 @@ const Footer = () => {
             window.addEventListener('scroll', debounce(checkPosition))
             //window.addEventListener('scroll', checkPosition)
         }
+
+        const getTramite = async () => {
+            const result = await axios(Api.API_PATH + '/tramite-short')
+            //console.log(result.data)
+            setDataTramiteList(result.data)
+
+            const result2 = await axios(Api.API_PATH + '/servicios-mini-short')
+            setDataServicioList(result2.data)
+        }
+
+        getTramite()
     }, [])
 
 
@@ -119,21 +135,13 @@ const Footer = () => {
                                 <div className="footer-list-style-1">
                                     <h2 className="title">Trámites en línea</h2>
                                     <div className="list-footer services-list-footer">
-                                        <Link href="/">
-                                            <a>Loren ipsum trámite</a>
-                                        </Link>
-                                        <Link href="/">
-                                            <a>Loren ipsum trámite</a>
-                                        </Link>
-                                        <Link href="/">
-                                            <a>Loren ipsum trámite</a>
-                                        </Link>
-                                        <Link href="/">
-                                            <a>Loren ipsum trámite</a>
-                                        </Link>
-                                        <Link href="/">
-                                            <a>Loren ipsum trámite</a>
-                                        </Link>
+                                        {
+                                            dataTramiteList.listTramite != undefined && (dataTramiteList.listTramite.map((item, index) => {
+                                                return <Link key={index} href={'/tramites-en-linea/'+item.link}>
+                                                    <a>{item.title}</a>
+                                                </Link>
+                                            }))
+                                        }
                                     </div>
                                 </div>
                             </div>
@@ -141,50 +149,29 @@ const Footer = () => {
                                 <div className="footer-list-style-1">
                                     <h2 className="title">Servicios</h2>
                                     <div className="list-footer formalities-list-footer accordion">  
+                                        
+                                        {
+                                            dataServicioList.listCategoriasShort != undefined && (dataServicioList.listCategoriasShort.map((item, index) => {
+                                                return <div className="accordion-item">
+                                                    <button className="accordion-button" onClick={() => setShow('acc'+index)}>
+                                                        <span>{item.titleCat}</span>
+                                                        <i className="icons icon-arrow-down-small-2"></i>
+                                                    </button>
 
-                                        <div className="accordion-item">
-                                            <button className="accordion-button" onClick={() => setShow('acc1')}>
-                                                <span>Instrumentos protocolares</span>
-                                                <i className="icons icon-arrow-down-small-2"></i>
-                                            </button>
-
-                                            {showAccordionData.accordionItem == 'acc1' && (
-                                                <div className="accordion-data list-footer">
-                                                    <Link href="/">
-                                                        <a>Instrumentos protocolares 1</a>
-                                                    </Link>
-                                                    <Link href="/">
-                                                        <a>Instrumentos protocolares 2</a>
-                                                    </Link>
-                                                    <Link href="/">
-                                                        <a>Instrumentos protocolares 3</a>
-                                                    </Link>
+                                                    {showAccordionData.accordionItem == 'acc'+index && (
+                                                        <div className="accordion-data list-footer">
+                                                            {
+                                                                item.data.map((item2, index2) => {
+                                                                    return <Link key={index+'-'+index2} href={'/servicios/' + item2.linkCat}>
+                                                                        <a>{item2.title}</a>
+                                                                    </Link>
+                                                                })
+                                                            }                                                            
+                                                        </div>
+                                                    )}
                                                 </div>
-                                            )}
-
-                                        </div>
-
-                                        <div className="accordion-item">
-                                            <button className="accordion-button" onClick={() => setShow('acc2')}>
-                                                <span>Asuntos no contenciosos</span>
-                                                <i className="icons icon-arrow-down-small-2"></i>
-                                            </button>
-
-                                            {showAccordionData.accordionItem == 'acc2' && (
-                                                <div className="accordion-data list-footer">
-                                                    <Link href="/">
-                                                        <a>Asuntos no contenciosos 1</a>
-                                                    </Link>
-                                                    <Link href="/">
-                                                        <a>Asuntos no contenciosos 2</a>
-                                                    </Link>
-                                                    <Link href="/">
-                                                        <a>Asuntos no contenciosos 3</a>
-                                                    </Link>
-                                                </div>
-                                            )}
-
-                                        </div>
+                                            }))
+                                        }                                        
 
                                     </div>
                                 </div>
@@ -192,17 +179,26 @@ const Footer = () => {
                             
                         </div>
 
+
                         <div className="col-xs-12 col-md-10 col-lg-6 flex footer-nav-list-2">
 
                             <div className="footer-row">
                                 <div className="footer-list-style-1">
-                                    <h2 className="title">Nuestra notaria</h2>
+                                    <h2 className="title">
+                                        <Link href="/nuestra-notaria">
+                                            <a>Nuestra notaria</a>
+                                        </Link>
+                                    </h2>
                                 </div>
                             </div>
 
                             <div className="footer-row">
                                 <div className="footer-list-style-1">
-                                    <h2 className="title">Nuestro Equipo</h2>
+                                    <h2 className="title">
+                                        <Link href="/nuestro-equipo">
+                                            <a>Nuestro Equipo</a>
+                                        </Link>
+                                    </h2>
                                 </div>
                             </div>
 
@@ -214,7 +210,11 @@ const Footer = () => {
 
                             <div className="footer-row">
                                 <div className="footer-list-style-1">
-                                    <h2 className="title">Contacto</h2>
+                                    <h2 className="title">
+                                        <Link href="/contacto">
+                                            <a>Contacto</a>
+                                        </Link>
+                                    </h2>
                                 </div>
                             </div>
 
@@ -233,8 +233,13 @@ const Footer = () => {
                         <div className="col-md-7 flex between-md start-xs middle-sm footer-nav-3-child">
                             <p className="copyright">©Todos los derechos reservados 2020 Notaría Roman</p>
                             <div className="legals">
-                                <a>Terminos y condiciones</a>       
-                                <a>Politica de privicidad</a>
+                                <Link href="/terminos-y-condiciones">
+                                    <a>Terminos y condiciones</a>       
+                                </Link>
+
+                                <Link href="/politicas-de-privacidad">
+                                    <a>Politica de privicidad</a>
+                                </Link>
                             </div>
                         </div>
                         <div className="col-md-5 flex end-md start-xs middle-sm">

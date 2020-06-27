@@ -111,6 +111,17 @@
       display block
     .icon-button-nav-mobile
       background-image url(../../img/icons/nav-close.png?v=1)
+
+  .nav li
+    flex-direction column
+  .nav a
+    width 100%
+  .nav li.active:after
+    bottom -1px
+
+  
+  .nav a.with-subnav span
+    padding 7px 22px 7px 22px
   
 
 
@@ -154,6 +165,11 @@
     padding 45px 0
     background #fff
 
+
+
+  .block-form
+    .g-form-col-2-type-1   
+      flex-direction row       
 
   
 
@@ -264,6 +280,7 @@
 
 
 
+
 @media (max-width: 630px)
 
   .parent-nav    
@@ -325,6 +342,7 @@
 
 
 
+
 @media (max-width: 575px)
   .container-fluid
     padding-left 20px
@@ -346,6 +364,10 @@
     margin-top 30px
   .section.tyc .caption-type-1
     padding 0 10px  
+
+  .tramites
+    .caption-type-1
+      padding 0 10px
 
 
 
@@ -381,6 +403,15 @@
     height 20px
   .parent-iframe-map .iframe-map
     height 400px
+
+
+  .block-form
+    .g-form-col-2-type-1   
+      flex-direction column
+      .box-form
+        width 100%!important
+        &:last-child 
+          margin-bottom 0
   
 
 
@@ -396,4 +427,9 @@
   .list-accounts
     padding-left 0
     padding-right 0
+
+
+@media (max-width: 320px)
+  .space-header
+	  height 160px
 

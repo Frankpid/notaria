@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-const Accounts = (props) => {
+const Accounts = ({mision, vision}) => {
     return (
         <div className="section mission-vision">                    
             <div className="row">
@@ -11,7 +11,7 @@ const Accounts = (props) => {
                             <div className="parent-title-2">
                                 <h2>Nuestra <strong>misión</strong></h2>
                             </div>
-                            <p className="description">Nuestro oficio notarial  brinda un servicio seguro, riguroso y eficaz con soluciones innovadoras, personalizadas y de calidad. Buscamos la excelencia en la atención y seguridad jurídica en los trámites realizados mediante una comunicación permanente con el cliente y atención comprometida y rigurosidad  en el logro de los fines previstos en la ley.</p>                            
+                            <p className="description">{mision}</p>                            
                         </div>
                     </div>
                 </div>
@@ -23,7 +23,7 @@ const Accounts = (props) => {
                             <div className="parent-title-2">
                                 <h2>Nuestra <strong>visión</strong></h2>
                             </div>
-                            <p className="description">Ser la notaria emblemática en el Perú, que sea sinónimo de buenas prácticas notariales en ética, seguridad, gestión y tecnologías de la información.</p>                            
+                            <p className="description">{vision}</p>                            
                         </div>
                     </div>
                 </div>
