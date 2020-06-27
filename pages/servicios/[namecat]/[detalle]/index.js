@@ -11,7 +11,9 @@ import axios from "axios"
 import ReactHtmlParser from 'react-html-parser'
 
 
-const ServicioCat = (props) => {    
+const ServicioCat = (props) => {  
+    
+    //console.log(props)
     
     const [dataService, setDataService] = useState(props.listServiciosShort) 
     const [dataTramite, setDataTramite] = useState([]) 
@@ -108,10 +110,11 @@ const ServicioCat = (props) => {
 
 
 ServicioCat.getInitialProps = async (ctx) => { 
-    const catNameUrl = ctx.query.namecat
-    const currentUrl = ctx.query.detalle
+    let catNameUrl = ctx.query.namecat
+    let currentUrl = ctx.query.detalle
+
     const getServiciosShort = await axios(Config.API_PATH + '/servicios-short')  
-    const getDataServicio = await axios(Config.API_PATH + '/servicios/'+catNameUrl+'/'+currentUrl)   
+    const getDataServicio = await axios(Config.API_PATH + '/servicio-article?catid='+catNameUrl+'&id='+currentUrl)   
     return {
         catNameUrl: catNameUrl,
         currentUrl: currentUrl,
