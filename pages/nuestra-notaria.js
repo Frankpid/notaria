@@ -16,11 +16,11 @@ const OurNotary = (props) => {
 
     const cssImg = `
         .section.snt-2 {
-            background-image: url(${Config.URL_BACK + '/uploads/' + folder_name + '/' + img})
+            background-image: url("${Config.URL_BACK + '/uploads/' + folder_name + '/' + img}")
         }
         @media (max-width: 630px){
             .section.snt-2 {
-                background-image: url(${Config.URL_BACK + '/uploads/' + folder_name + '/' + img_rpv})
+                background-image: url("${Config.URL_BACK + '/uploads/' + folder_name + '/' + img_rpv}")
             }
         }        
     `

@@ -4,13 +4,19 @@ import Slider from "react-slick"
 import Link from "next/link"
 import Config from "../config"
 
-const ServiceListItem = (props) => {        
+const ServiceListItem = (props) => { 
+        
+    const img = props.data.img_preview.length>2 ? JSON.parse(props.data.img_preview)[0] : ''
+    const folder = props.data.folder
+
     return (              
         <div className={props.class}> 
             <div className="wrapper-children">
                 <Link href={props.link}>
                     <a>
-                        <img src={Config.URL + "/img/service-img.jpg?v=2"} alt={props.data.description} />
+                        {img.length>0 && (
+                            <img src={Config.URL_BACK + "/uploads/" + folder + "/" + img + "?v=2"} alt={props.data.description} />
+                        )}
                     </a>
                 </Link>
                 <div className="caption">
