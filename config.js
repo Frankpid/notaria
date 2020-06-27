@@ -21,7 +21,7 @@ if( envm === "development" ){
 	}
 }else{	
 	dataConfig = {
-		"URL": "http://142.93.3.176:3000",
+		"URL": "https://notaria.now.sh",
 		"URL_BACK": "http://142.93.3.176:3001",
 		"PORT": 3000,
 		"NODE_ENV": "production",
