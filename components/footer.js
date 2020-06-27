@@ -1,7 +1,7 @@
 import Link from "next/link"
 import React, {useState, useEffect} from "react"
 import axios from "axios"
-import Api from "../config"
+import Config from "../config"
 
 
 const Footer = () => {
@@ -70,11 +70,11 @@ const Footer = () => {
         }
 
         const getTramite = async () => {
-            const result = await axios(Api.API_PATH + '/tramite-short')
+            const result = await axios(Config.API_PATH + '/tramite-short')
             //console.log(result.data)
             setDataTramiteList(result.data)
 
-            const result2 = await axios(Api.API_PATH + '/servicios-mini-short')
+            const result2 = await axios(Config.API_PATH + '/servicios-mini-short')
             setDataServicioList(result2.data)
         }
 

@@ -8,53 +8,35 @@ import Config from "../../../../config"
 import Detail from "../../../../components/detail"
 import FormalitiesList from "../../../../components/formalities-list"
 import axios from "axios"
+import ReactHtmlParser from 'react-html-parser'
 
 
 const ServicioCat = (props) => {    
     
     const [dataService, setDataService] = useState(props.listServiciosShort) 
-    const [dataTramite, setDataTramite] = useState([])  
+    const [dataTramite, setDataTramite] = useState([]) 
+
+    const folderName = props.getDataServicio[0]['data'][0]['folder_name']
+    const img = props.getDataServicio[0]['data'][0]['object_img'].length>2 ? JSON.parse(props.getDataServicio[0]['data'][0]['object_img'])[0] : ""
+    const pdf = props.getDataServicio[0]['data'][0]['object_pdf'].length>2 ? JSON.parse(props.getDataServicio[0]['data'][0]['object_pdf'])[0] : ""
+    const dataInner = ReactHtmlParser(props.getDataServicio[0]['data'][0]['object_descripcion'])
+    
 
     const dataCurrent = <>
         <div className="header-parent-title flex middle-xs between-md">        
-            <h2>Escritura pública</h2>
-            <a href="#" className="button-detail with-bg-img"></a>
+            <h2>{props.getDataServicio[0]['data'][0]['nombre']}</h2>
+            <a href={Config.URL_BACK+'/uploads/'+folderName+'/'+pdf} className="button-detail with-bg-img" target={"_blank"} download></a>
         </div>
 
         <div className="detail-body">     
-            <div className="inner-data">
-                <img src={Config.URL + "/img/detail-img.jpg?v=2"} className="banner-detail" />    
-                <p>Para la elevación a Escritura Pública existen requisitos generales (aplicables a todos los actos o contratos) y otros especiales que corresponden sólo a algunos actos o contratos.</p>  
-
-                <h3>Beneficios</h3>
-                <p>Una Escritura Pública tiene el beneficio de otorgar fecha cierta a todos los actos y contratos. El Notario corrobora la identidad de los contratantes y su contrato se conserva para siempre en su Archivo Notarial, pudiendo obtener copias a través de Testimonios y Partes Notariales, todas las veces que sean necesarias.</p>
-
-                <h3>Requisitos generales</h3>
-                <p>Una Escritura Pública tiene el beneficio de otorgar fecha cierta a todos los actos y contratos. El Notario corrobora la identidad de los contratantes y su contrato se conserva para siempre en su Archivo Notarial, pudiendo obtener copias a través de Testimonios y Partes Notariales, todas las veces que sean necesarias.</p>
-
-                <ul>
-                    <li>Minuta suscrita por todos los contratantes y autorizada por Abogado Colegiado. Ello excepto en los siguientes casos:</li>
-                    <ul>
-                        <li>Otorgamiento, aceptación, sustitución, revocación y renuncia del poder;</li>
-                        <li>Renuncia de nacionalidad;</li>
-                        <li>Nombramiento de tutor y curador en los casos que puede hacerse por escritura pública;</li>
-                        <li>Reconocimiento de hijos;</li>
-                        <li>Autorización para el matrimonio de menores de edad otorgada por quienes ejercen la patria potestad;</li>
-                        <li>Aceptación expresa o renuncia de herencia;</li>
-                        <li>Declaración jurada de bienes y rentas;</li>
-                        <li>Declaración de voluntad de constitución de pequeña o microempresa; entre otros.</li>
-                    </ul>
-                    <li>Documento Nacional de Identidad (Original y Copia Simple) de los contratantes. El Documento Nacional debe encontrarse vigente (revisar su fecha de caducidad). Si desea mayor información sobre el DNI, hacer clic en el siguiente vínculo: <a href="#">http://www.reniec.gob.pe</a></li>
-                    <li>En el caso de Extranjeros, presentarán Carnet de Extranjería vigente (Original y Copia) , con el pago de la tasa del año en curso o Pasaporte (Original y Copia) con visación que lo autorice a celebrar negocios en el territorio nacional. Debe recordarse que actualmente se está efectuando el cambio del Carnet Extranjería Manual por uno de emisión mecanizada. Si desea mayor información sobre el Carnet de Extranjería, su canje y las autorizaciones de visado del Pasaporte hacer clic en el siguiente vínculo: <a href="#">http://www.migraciones.gob.pe</a></li>
-                    <li>En caso que alguno de los contratantes actúe a través de representantes (apoderado) acompañar Certificado de Vigencia de Poder expedido por la <strong>SUNARP.</strong></li>
-                    <li>En caso que alguno de los contratantes actúe en representación de una persona jurídica, acompañar Certificado de Vigencia de Poder expedido por la <strong>SUNARP.</strong></li>
-                    <li>Si se solicita constancia o fe de entrega notarial de un cheque, acompañar copia del cheque a ser entregado.</li>
-                </ul>
+            <div className="inner-data">                
+                <img style={{marginBottom: 20}} src={Config.URL_BACK + "/uploads/"+ folderName +"/"+ img} className="banner-detail" />   
+                {dataInner}
             </div>  
             <p>Tenga en cuenta que en determinados actos y/o contratos deberá acreditar ante el Notario el pago de tributos; ello como requisito previo a la elevación de la escritura pública.</p>                     
         </div>
 
-        <a href="#" className="button-detail with-bg-img" style={{marginTop: "37px"}}></a>
+        <a href={Config.URL_BACK+'/uploads/'+folderName+'/'+pdf} className="button-detail with-bg-img" style={{marginTop: "37px"}} target={"_blank"} download></a>
     </>
 
 
@@ -126,11 +108,15 @@ const ServicioCat = (props) => {
 
 
 ServicioCat.getInitialProps = async (ctx) => { 
-    const getServiciosShort = await axios(Config.API_PATH + '/servicios-short')   
+    const catNameUrl = ctx.query.namecat
+    const currentUrl = ctx.query.detalle
+    const getServiciosShort = await axios(Config.API_PATH + '/servicios-short')  
+    const getDataServicio = await axios(Config.API_PATH + '/servicios/'+catNameUrl+'/'+currentUrl)   
     return {
-        catNameUrl: ctx.query.namecat,
-        currentUrl: ctx.query.detalle,
-        listServiciosShort: getServiciosShort.data.listCategoriasShort
+        catNameUrl: catNameUrl,
+        currentUrl: currentUrl,
+        listServiciosShort: getServiciosShort.data.listCategoriasShort,
+        getDataServicio: getDataServicio.data.dataServicio
     }
 }
 
