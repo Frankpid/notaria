@@ -47,7 +47,7 @@ const Accounts = (props) => {
                             <div className="parent-title-2">
                                 <h2><strong>Tu empresa en <br/>72 horas</strong></h2>
                             </div>
-                            <p className="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's standard dummy text ever since the 1500s, when an unknown printer took a galley of type and scrambled it to make a type specimen book. It has survived not only five .</p>
+                            <p className="description">Es un proceso sencillo que aprovecha las ventajas del mundo digital para acelerar la constitución de tu empresa. Llena nuestro formulario online y uno de nuestros asesores se pondrá en contacto contigo para explicarte los pasos a seguir y nuestra notaria se encarga de hacer la escritura pública de tu empresa.</p>
                             <a className="button-link" href="#">Solicitar servicio</a>
                         </div>
                     </div>

@@ -44,16 +44,22 @@ const ServiceList = (props) => {
 
     const dataCatList = dataService.map((item, index) => {
         return <div className="box-cat">
-            <h2 className="title-cat">{item.titleCat}</h2>
-            <div className="slideshow-services slideshow-type-1">
-                <Slider key={index} {...settings}>
-                    { 
-                        item.data.map((itemInner, index2) => {
-                            return <ServiceListItem key={index2} data={itemInner} link={'/servicios/' + item.linkCat + '/' + itemInner.linkCat} class={"slick-item"} />
-                        })                        
-                    }                    
-                </Slider>
-            </div>            
+            {
+                typeof item.data != "undefined" && (
+                    <>
+                        <h2 className="title-cat">{item.titleCat}</h2>
+                        <div className="slideshow-services slideshow-type-1">
+                            <Slider key={index} {...settings}>
+                                { 
+                                    item.data.map((itemInner, index2) => {
+                                        return <ServiceListItem key={index2} data={itemInner} link={'/servicios/' + item.linkCat + '/' + itemInner.linkCat} class={"slick-item"} />
+                                    })                        
+                                }                    
+                            </Slider>
+                        </div>            
+                    </>
+                )
+            }
         </div>
     })
 

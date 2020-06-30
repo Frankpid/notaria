@@ -11,7 +11,7 @@ import axios from "axios"
 
 const ServicioCat = (props) => {    
 
-    const [dataService, setDataService] = useState(props.listServiciosShort)    
+    const [dataService, setDataService] = useState(props.listServiciosShort)      
     
     useEffect(() => { 
         
@@ -26,43 +26,54 @@ const ServicioCat = (props) => {
         if( props.currentUrl != 'todos' ){
             let verifyUrl = searchInObject(props.currentUrl, dataService)
             !verifyUrl && (Router.push('/'))
-        }
+        }            
 
     }, [])
-
+    
+    const capitalizeFirstLetter = (string) => {
+        console.log("frank")
+        const rfuncCapitalize = '/ jola'
+        return rfuncCapitalize + '/jola'
+    }
 
     const dataCatList = dataService.map((item, index) => {
         return props.currentUrl == 'todos' ?
             <div className="box-cat">
-                <h2 className="title-cat">{item.titleCat}</h2>
-                <div className="row slideshow-type-1">            
-                    { 
-                        item.data.map((itemInner, index2) => {
-                            return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6'} />
-                        })                        
-                    }                                
-                </div>            
+                {typeof item.data != "undefined" && (
+                    <>
+                        <h2 className="title-cat">{capitalizeFirstLetter(item.titleCat)}</h2>
+                        <div className="row slideshow-type-1">            
+                            { 
+                                item.data.map((itemInner, index2) => {
+                                    return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6'} />
+                                })                        
+                            }                                
+                        </div>         
+                    </>   
+                )}
             </div>
         : props.currentUrl == item.linkCat ? 
-            <div className="box-cat" style={{marginTop: '0'}}>                
-                <div className="row slideshow-type-1">            
-                    { 
-                        item.data.map((itemInner, index2) => {
-                            return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6'} />
-                        })                        
-                    }                                
-                </div>            
+            <div className="box-cat" style={{marginTop: '0'}}>  
+                {typeof item.data != "undefined" && (
+                    <>              
+                        <div className="row slideshow-type-1">            
+                            { 
+                                item.data.map((itemInner, index2) => {
+                                    return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6'} />
+                                })                        
+                            }                                
+                        </div> 
+                    </>   
+                )}           
             </div>
         : ""
     })
-
 
     const doNavService = dataService.map((item, index) => {
         return <Link href={"/servicios/" + item.linkCat}>
             <a className={item.linkCat == props.currentUrl ? 'active' : ''}>{item.titleCat}</a>
         </Link>                    
     })
-
 
     const doNavServiceMobile = dataService.map((item, index) => {
         return  <option                     
@@ -73,11 +84,9 @@ const ServicioCat = (props) => {
                              
     })
 
-
     const redirectCats = (e) => {        
         Router.push('/servicios/' + e.target.value)
-    }
-
+    }    
 
     return (
         <Container namePage="servicios margins-body-type-2" titlePage="Servicios"> 
