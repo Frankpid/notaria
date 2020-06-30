@@ -4,13 +4,17 @@ import Slider from "react-slick"
 import Link from "next/link"
 import Config from "../config"
 
-const FortilitiesListItem = (props) =>{        
+const FortilitiesListItem = (props) =>{     
+    
+    const img = props.data.img.length>2 ? JSON.parse(props.data.img)[0] : ''
+    const folder = props.data.folder
+
     return (
         <div className="slick-item">                                 
             <div className="caption">
                 <div>                                        
                     <div className="parent-title-2">
-                        <img src={Config.URL + "/img/icons/formalities.png?v=2"} alt={props.data.description} />                        
+                        <img src={Config.URL_BACK + "/uploads/" + folder + "/" + img + "?v=2"} alt={props.data.description} />                        
                         <h2><strong>{props.data.title}</strong></h2>
                     </div>
                     <p className="description">{props.data.description}</p>
