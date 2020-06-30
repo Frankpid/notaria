@@ -21,7 +21,7 @@ if( envm === "development" ){
 	}	
 }else{	
 	dataConfig = {
-		"URL": "https://142.93.3.176:3000",
+		"URL": "http://142.93.3.176:3000",
 		"URL_BACK": "http://142.93.3.176:3001",
 		"PORT": 3000,
 		"NODE_ENV": "production",
