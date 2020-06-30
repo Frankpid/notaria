@@ -12,6 +12,8 @@ import Api from "../config"
 
 const Index = (props) => {
 
+    console.log(Api)
+
     return (
         <Container namePage="home" titlePage="Home">
             <SlideShow data={props.listSlideshow} />

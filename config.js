@@ -1,6 +1,8 @@
 var dataConfig = {}
 const envm = process.env.NODE_ENV
 
+console.log(envm)
+
 if( envm === "production" ){
 	dataConfig = {		
 		"URL": "https://142.93.3.176:3000",
