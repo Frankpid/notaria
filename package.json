@@ -10,7 +10,7 @@
     "build": "next build",
     "start": "next start",
     "prod_start": "NODE_ENV=production node server.js",
-    "server": "npm run build pm2 start npm --name 'next' -- start"
+    "server": "npm run build && pm2 start npm --name 'next' -- start"
   },
   "keywords": [],
   "author": "Frank Pinedo",
