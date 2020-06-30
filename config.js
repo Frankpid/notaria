@@ -19,6 +19,7 @@ if( envm === "development" ){
 		"SECURE": false,
 		"API_PATH": "http://localhost:4000/getapi"
 	}
+	console.log(dataConfig)
 }else{	
 	dataConfig = {
 		"URL": "https://142.93.3.176:3000",
@@ -37,6 +38,7 @@ if( envm === "development" ){
 		"SECURE": true,
 		"API_PATH": "http://142.93.3.176:3001/getapi"
 	}
+	console.log(dataConfig)
 }
 
 module.exports = dataConfig

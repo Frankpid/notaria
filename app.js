@@ -5,8 +5,10 @@ const Config = require('./config')
 const dev = process.env.NODE_ENV !== 'production'
 const app = next({ dev })
 const handle = app.getRequestHandler()
-const PORT = process.env.PORT || Config.PORT
+const PORT = 3000 || Config.PORT
 const URL = Config.URL
+
+console.log(PORT)
     
 app.prepare()
 .then(() => {
