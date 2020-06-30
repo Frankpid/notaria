@@ -1,9 +1,7 @@
 var dataConfig = {}
 const envm = process.env.NODE_ENV
 
-console.log(envm)
-
-if( envm === "custom_production" ){
+if( envm === "staging" ){
 	dataConfig = {		
 		"URL": "https://142.93.3.176:3000",
 		"URL_BACK": "http://142.93.3.176:3001",
