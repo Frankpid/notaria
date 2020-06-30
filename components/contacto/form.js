@@ -4,6 +4,8 @@ import {useForm} from "react-hook-form"
 import $ from "jquery"
 import arrCountryList from "./countries"
 import PopupThanks from "./popup-thanks"
+import Config from "../../config"
+import axios from "axios"
 
 
 
@@ -80,8 +82,18 @@ const Form = (props) => {
 
 
     const onSubmit = data => {        
-        setShowForm(true)
-        alert(JSON.stringify(data))
+        //alert(JSON.stringify(data))
+        const sendValue = data
+
+        axios({
+            method: 'post',
+            url: Config.API_PATH + '/p-contact-form',
+            data: sendValue
+        })
+        .then(function (response) {
+            setShowForm(true)        
+            //console.log(response)
+        })
     }
     
     

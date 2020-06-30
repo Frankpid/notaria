@@ -167,7 +167,7 @@ const Footer = () => {
                                                                 <div className="accordion-data list-footer">
                                                                     {
                                                                         item.data.map((item2, index2) => {
-                                                                            return <Link key={index+'-'+index2} href={'/servicios/' + item2.linkCat}>
+                                                                            return <Link key={index+'-'+index2} href={'/servicios/' + item.linkCat + '/' + item2.linkCat}>
                                                                                     <a>{capitalize(item2.title)}</a>
                                                                                 </Link>
                                                                             

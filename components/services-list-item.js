@@ -9,6 +9,10 @@ const ServiceListItem = (props) => {
     const img = props.data.img_preview.length>2 ? JSON.parse(props.data.img_preview)[0] : ''
     const folder = props.data.folder
 
+    const capitalize = (s) => {        
+        return s.charAt(0).toUpperCase() + s.slice(1)
+    }
+
     return (              
         <div className={props.class}> 
             <div className="wrapper-children">
@@ -21,7 +25,7 @@ const ServiceListItem = (props) => {
                 </Link>
                 <div className="caption">
                     <div>                                        
-                        <div className="parent-title-2"><h2>{props.data.title}</h2></div>
+                        <div className="parent-title-2"><h2>{capitalize(props.data.title)}</h2></div>
                         <p className="description">{props.data.description}</p>
                         <Link href={props.link}>
                             <a className="button-link">Solicitar servicio</a>

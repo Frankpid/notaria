@@ -53,8 +53,8 @@ const AutorizacionViaje = (props) => {
         })
         .then(function (response) {
             setShowForm(true)
-            console.log(response)
-        });
+            //console.log(response)
+        })
     }
     
     const triggerClosePopup = () => {
