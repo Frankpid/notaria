@@ -14,7 +14,7 @@ const FortilitiesListItem = (props) =>{
             <div className="caption">
                 <div>                                        
                     <div className="parent-title-2">
-                        <img src={Config.URL_BACK + "/uploads/" + folder + "/" + img + "?v=2"} alt={props.data.description} />                        
+                        <img style={{width: 38}} src={Config.URL_BACK + "/uploads/" + folder + "/" + img + "?v=2"} alt={props.data.description} />                        
                         <h2><strong>{props.data.title}</strong></h2>
                     </div>
                     <p className="description">{props.data.description}</p>

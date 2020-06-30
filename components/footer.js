@@ -234,19 +234,21 @@ const Footer = () => {
                             <p className="copyright">©Todos los derechos reservados 2020 Notaría Roman</p>
                             <div className="legals">
                                 <Link href="/terminos-y-condiciones">
-                                    <a>Terminos y condiciones</a>       
+                                    <a target="_blank">Terminos y condiciones</a>       
                                 </Link>
 
                                 <Link href="/politicas-de-privacidad">
-                                    <a>Politica de privicidad</a>
+                                    <a target="_blank">Politica de privicidad</a>
                                 </Link>
                             </div>
                         </div>
                         <div className="col-md-5 flex end-md start-xs middle-sm">
-                            <div className="brand-2">
-                                <span>Desarrollado por</span>
-                                <img src="../../img/libiak.png?v=1" alt="Libiak" />
-                            </div>
+                            <a href="https://libiak.com/" target="_blank">
+                                <div className="brand-2">
+                                    <span>Desarrollado por</span>
+                                    <img src="../../img/libiak.png?v=1" alt="Libiak" />
+                                </div>
+                            </a>
                         </div>
                     </div>
                 </div>
