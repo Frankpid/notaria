@@ -23,10 +23,13 @@ const ServicioCat = (props) => {
     const pdf = props.getDataServicio[0]['data'][0]['object_pdf'].length>2 ? JSON.parse(props.getDataServicio[0]['data'][0]['object_pdf'])[0] : ""
     const dataInner = ReactHtmlParser(props.getDataServicio[0]['data'][0]['object_descripcion'])
     
-
+    const capitalize = (s) => {        
+        return s.charAt(0).toUpperCase() + s.slice(1)
+    }
+    
     const dataCurrent = <>
         <div className="header-parent-title flex middle-xs between-md">        
-            <h2>{props.getDataServicio[0]['data'][0]['nombre']}</h2>
+            <h2>{capitalize(props.getDataServicio[0]['data'][0]['nombre'])}</h2>
             <a href={Config.URL_BACK+'/uploads/'+folderName+'/'+pdf} className="button-detail with-bg-img" target={"_blank"} download></a>
         </div>
 
@@ -77,21 +80,18 @@ const ServicioCat = (props) => {
         }
 
     }, [])
-
-    function capitalizeFirstLetter(string) {
-        return string.charAt(0).toUpperCase() + string.slice(1)
-    }
+    
 
     const doNavLateral = dataService && dataService.map((item, index) => {
         return <div key={index} className={"item item-"+index}>
             {
                 typeof item.data != "undefined" && (
                     <>
-                        <h2 className="title-list-detail">{jsUcfirst(item.titleCat)}</h2>
+                        <h2 className="title-list-detail">{capitalize(item.titleCat)}</h2>
                         <div className="data-list-detail">
                             {item.data.map((item2, index2) => {
                                 return <Link key={index + "-" + index2} href={"../" + item.linkCat + "/" + item2.linkCat}>
-                                    <a className={props.catNameUrl + props.currentUrl == item.linkCat + item2.linkCat ? "active" : ""}>{jsUcfirst(item2.title)}</a>
+                                    <a className={props.catNameUrl + props.currentUrl == item.linkCat + item2.linkCat ? "active" : ""}>{capitalize(item2.title)}</a>
                                 </Link>
                             })}
                         </div>
@@ -115,10 +115,7 @@ const ServicioCat = (props) => {
         </Container>
     )
 
-    function jsUcfirst(string) 
-{
-    return string.charAt(0).toUpperCase() + string.slice(1);
-}
+
 }
 
 

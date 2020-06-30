@@ -66,8 +66,10 @@
   .sub-nav
     position relative
     width 100%
-    padding 0 25px
+    padding 0px
     opacity 1	
+    a 
+      padding 0 47px!important
 
 
   .parent-nav
@@ -122,6 +124,10 @@
   
   .nav a.with-subnav span
     padding 7px 22px 7px 22px
+
+  
+  .nav li.active:after
+    display none !important
   
 
 
@@ -427,6 +433,10 @@
   .list-accounts
     padding-left 0
     padding-right 0
+  
+  .sub-nav
+    a 
+      padding 0 42px!important
 
 
 @media (max-width: 320px)

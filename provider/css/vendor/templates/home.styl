@@ -109,6 +109,11 @@
     padding 12px 17px
     border-radius 20px
     font-family "apercu-bold", sans-serif
+    transition 0.25s
+    &:hover, &:focus
+      box-shadow 0 0.5em 0.5em -0.4em colorBtnCard
+      transform translateY(-0.25em)
+      border-color colorBtnCard
   .col
     padding-top 13px
     padding-bottom 13px
@@ -198,6 +203,10 @@
     color colorDescriptionServices
   .button-link
     background colorBtnServices
+    &:hover, &:focus
+      background colorBtnServices
+      box-shadow 0 0.5em 0.5em -0.4em colorBtnServices    
+      border-color colorBtnServices
   .title-cat
     font-size 20px
     display flex

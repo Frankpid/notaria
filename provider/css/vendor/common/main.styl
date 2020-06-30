@@ -108,6 +108,7 @@
 		margin-bottom 18px    
 	.parent-title-2
 		width 100%
+		overflow-wrap anywhere
 		strong
 			font-family "apercu-bold", sans-serif   
 	.parent-title-2 *
@@ -126,7 +127,12 @@
 		justify-content center
 		border-radius 20px
 		margin-top 25px
-		font-family "apercu-bold", sans-serif
+		font-family "apercu-bold", sans-serif		
+		transition 0.25s
+		&:hover, &:focus
+			box-shadow 0 0.5em 0.5em -0.4em colorBtnSlider
+			transform translateY(-0.25em)
+			border-color colorBtnSlider
 
 
 

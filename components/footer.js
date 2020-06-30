@@ -12,6 +12,9 @@ const Footer = () => {
 
     const [dataServicioList, setDataServicioList] = useState([])
 
+    const capitalize = (s) => {        
+        return s.charAt(0).toUpperCase() + s.slice(1)
+    }
 
     useEffect(() => {
         let aScript = document.createElement('script')
@@ -151,26 +154,31 @@ const Footer = () => {
                                     <div className="list-footer formalities-list-footer accordion">  
                                         
                                         {
-                                            dataServicioList.listCategoriasShort != undefined && (dataServicioList.listCategoriasShort.map((item, index) => {
-                                                return <div className="accordion-item">
-                                                    <button className="accordion-button" onClick={() => setShow('acc'+index)}>
-                                                        <span>{item.titleCat}</span>
-                                                        <i className="icons icon-arrow-down-small-2"></i>
-                                                    </button>
+                                            dataServicioList.listCategoriasShort != undefined && (
+                                                dataServicioList.listCategoriasShort.map((item, index) => {
+                                                    return typeof item.data != "undefined" && (
+                                                        <div className="accordion-item">
+                                                            <button className="accordion-button" onClick={() => setShow('acc'+index)}>
+                                                                <span>{item.titleCat}</span>
+                                                                <i className="icons icon-arrow-down-small-2"></i>
+                                                            </button>
 
-                                                    {showAccordionData.accordionItem == 'acc'+index && (
-                                                        <div className="accordion-data list-footer">
-                                                            {
-                                                                item.data.map((item2, index2) => {
-                                                                    return <Link key={index+'-'+index2} href={'/servicios/' + item2.linkCat}>
-                                                                        <a>{item2.title}</a>
-                                                                    </Link>
-                                                                })
-                                                            }                                                            
+                                                            {showAccordionData.accordionItem == 'acc'+index && (
+                                                                <div className="accordion-data list-footer">
+                                                                    {
+                                                                        item.data.map((item2, index2) => {
+                                                                            return <Link key={index+'-'+index2} href={'/servicios/' + item2.linkCat}>
+                                                                                    <a>{capitalize(item2.title)}</a>
+                                                                                </Link>
+                                                                            
+                                                                        })
+                                                                    }                                                            
+                                                                </div>
+                                                            )}
                                                         </div>
-                                                    )}
-                                                </div>
-                                            }))
+                                                    )
+                                                })
+                                            )
                                         }                                        
 
                                     </div>
