@@ -42,6 +42,10 @@ const ServicioCat = (props) => {
     </>
 
 
+    function capitalizeFirstLetter(string) {
+        return string.charAt(0).toUpperCase() + string.slice(1);
+    }
+
     useEffect(() => {      
         
         const getTramiteShort = async () => {
@@ -82,14 +86,20 @@ const ServicioCat = (props) => {
 
     const doNavLateral = dataService && dataService.map((item, index) => {
         return <div key={index} className={"item item-"+index}>
-            <h2 className="title-list-detail">{item.titleCat}</h2>
-            <div className="data-list-detail">
-                {item.data.map((item2, index2) => {
-                    return <Link key={index + "-" + index2} href={"../" + item.linkCat + "/" + item2.linkCat}>
-                        <a className={props.catNameUrl + props.currentUrl == item.linkCat + item2.linkCat ? "active" : ""}>{item2.title}</a>
-                    </Link>
-                })}
-            </div>
+            {
+                typeof item.data != "undefined" && (
+                    <>
+                        <h2 className="title-list-detail">{capitalizeFirstLetter(item.titleCat)}</h2>
+                        <div className="data-list-detail">
+                            {item.data.map((item2, index2) => {
+                                return <Link key={index + "-" + index2} href={"../" + item.linkCat + "/" + item2.linkCat}>
+                                    <a className={props.catNameUrl + props.currentUrl == item.linkCat + item2.linkCat ? "active" : ""}>{item2.title}</a>
+                                </Link>
+                            })}
+                        </div>
+                    </>
+                )
+            }            
         </div>
     })
 
