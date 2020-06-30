@@ -7,12 +7,10 @@ import Accounts from "../components/accounts"
 import Confidence from "../components/confidence"
 import ContactForm from "../components/contacto/form"
 import axios from "axios"
-import Api from "../config"
+import Config from "../config"
 
 
-const Index = (props) => {
-
-    console.log(Api)
+const Index = (props) => {    
 
     return (
         <Container namePage="home" titlePage="Home">
@@ -28,10 +26,10 @@ const Index = (props) => {
 }
 
 Index.getInitialProps = async (ctx) => {
-    const getSlideShow = await axios(Api.API_PATH + '/slideshow')
-    const getTramiteShort = await axios(Api.API_PATH + '/tramite-short')
-    const getServiciosShort = await axios(Api.API_PATH + '/servicios-short')
-    const getPartners = await axios(Api.API_PATH + '/partners')
+    const getSlideShow = await axios(Config.API_PATH + '/slideshow')
+    const getTramiteShort = await axios(Config.API_PATH + '/tramite-short')
+    const getServiciosShort = await axios(Config.API_PATH + '/servicios-short')
+    const getPartners = await axios(Config.API_PATH + '/partners')
     return { 
         listSlideshow: getSlideShow.data.listSlideshow,
         listTramiteShort: getTramiteShort.data.listTramite,
