@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form"
 import Config from "../../../config"
 import FormPayment from "../../../components/form-payment"
 import axios from "axios"
+import PopupThanks from "../../contacto/popup-thanks"
 
 
 const AutorizacionViajeInternacional = (props) => {
@@ -62,7 +63,7 @@ const AutorizacionViajeInternacional = (props) => {
                 }
             })
             .then(res => {
-                console.log('Exito')                
+                console.log('Exito upload')                 
             }).catch(err => {
                 console.error('Error')
             })
@@ -76,6 +77,7 @@ const AutorizacionViajeInternacional = (props) => {
             data: sendValue
         })
         .then(function (response) {
+            console.log('Exito')  
             setShowForm(true)
             formReset()
         })
@@ -90,6 +92,13 @@ const AutorizacionViajeInternacional = (props) => {
     return (
 
         <>            
+            { showForm && (
+                <PopupThanks eClick={triggerClosePopup}>
+                    <h3 className="title">¡Gracias!</h3>
+                    <p className="description">Gracias por ponerte en contacto con <strong>Notaría Román.</strong> <br />Uno de nuestros asesores se comunicará con usted a la brevedad.</p>
+                </PopupThanks>
+            )}
+
             <form id="form_data_2" name="form_data_2" onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="block-form">                     

@@ -3,10 +3,8 @@ import Link from "next/link"
 const Navigation = () =>{
     return (
         <div className="nav-small">
-            <Link href="/reserva-de-citas">
-                <a className="btn-reserve">Reserva de citas</a>
-            </Link>                    
-            <a className="btn-fb" href="https://facebook.com" target="_blank">Facebook</a>
+            <a className="btn-reserve" href="http://www.notariaroman.pe/reservas/" target="_blank">Reserva de citas</a>                 
+            <a className="btn-fb" href="https://www.facebook.com/notariaroman/" target="_blank">Facebook</a>
         </div>
     )
 }

@@ -96,7 +96,7 @@ const TransferenciaVehicular = (props) => {
                 }
             })
             .then(res => {
-                console.log('Exito')                
+                console.log('Exito upload')                
             }).catch(err => {
                 console.error('Error')
             })
@@ -110,6 +110,7 @@ const TransferenciaVehicular = (props) => {
             data: sendValue
         })
         .then(function (response) {
+            console.log('exito')
             setShowForm(true)
             formReset()
         })

@@ -102,7 +102,7 @@ const ConstitucionEmpresas = (props) => {
 
     const onSubmit = data => {    
 
-        console.log(data)
+        //console.log(data)
     
         //return false
 
@@ -121,7 +121,7 @@ const ConstitucionEmpresas = (props) => {
                 }
             })
             .then(res => {
-                console.log('Exito')                
+                console.log('Exito upload')               
             }).catch(err => {
                 console.error('Error')
             })
@@ -135,6 +135,7 @@ const ConstitucionEmpresas = (props) => {
             data: sendValue
         })
         .then(function (response) {
+            console.log('Exito')  
             setShowForm(true)
             formReset()
         })
@@ -432,7 +433,7 @@ const ConstitucionEmpresas = (props) => {
                                         <input type="file" id="sle_estatuto" name="sle_estatuto" className="form-item" accept=".doc, .jpg, .jpeg, .pdf"
                                         onChange={(e) => fileOnChange2(e)}
                                         ref={register({
-                                            required: "Este campo es obligatorio"
+                                            required: false
                                         })}
                                         />  
                                         {errors.sle_estatuto && <span className="fi-validator">{errors.sle_estatuto.message}</span>}          

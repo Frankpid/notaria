@@ -98,7 +98,7 @@ const TransferenciaInmobiliaria = (props) => {
                 }
             })
             .then(res => {
-                console.log('Exito')                
+                console.log('Exito upload')               
             }).catch(err => {
                 console.error('Error')
             })
@@ -112,6 +112,7 @@ const TransferenciaInmobiliaria = (props) => {
             data: sendValue
         })
         .then(function (response) {
+            console.log('Exito') 
             setShowForm(true)
             formReset()
         })

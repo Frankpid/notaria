@@ -4,6 +4,7 @@ import {useForm} from "react-hook-form"
 import Config from "../../../config"
 import FormPayment from "../../../components/form-payment"
 import axios from "axios"
+import PopupThanks from "../../contacto/popup-thanks"
 
 
 const AutorizacionViajeNacional = (props) => {
@@ -62,7 +63,7 @@ const AutorizacionViajeNacional = (props) => {
                 }
             })
             .then(res => {
-                console.log('Exito')                
+                console.log('Exito upload')                
             }).catch(err => {
                 console.error('Error')
             })
@@ -75,7 +76,8 @@ const AutorizacionViajeNacional = (props) => {
             url: Config.API_PATH + '/p-audv',
             data: sendValue
         })
-        .then(function (response) {
+        .then(function (response) { 
+            console.log('Exito')             
             setShowForm(true)
             formReset()
         })        
@@ -95,6 +97,13 @@ const AutorizacionViajeNacional = (props) => {
     return (
 
         <>            
+            { showForm && (
+                <PopupThanks eClick={triggerClosePopup}>
+                    <h3 className="title">¡Gracias!</h3>
+                    <p className="description">Gracias por ponerte en contacto con <strong>Notaría Román.</strong> <br />Uno de nuestros asesores se comunicará con usted a la brevedad.</p>
+                </PopupThanks>
+            )}
+
             <form id="form_data_1" name="form_data_1" onSubmit={handleSubmit(onSubmit)}>
 
                 <div className="block-form"> 

@@ -81,7 +81,7 @@ const Poderes = (props) => {
 
 
     const onSubmit = data => {    
-        console.log(data)    
+        //console.log(data)    
         //return false
         if( countFile.length>0 ){                        
             var formData = new FormData()   
@@ -94,7 +94,7 @@ const Poderes = (props) => {
                 }
             })
             .then(res => {
-                console.log('Exito')                
+                console.log('Exito upload')                
             }).catch(err => {
                 console.error('Error')
             })
@@ -108,6 +108,7 @@ const Poderes = (props) => {
             data: sendValue
         })
         .then(function (response) {
+            console.log('exito')
             setShowForm(true)
             formReset()
         })

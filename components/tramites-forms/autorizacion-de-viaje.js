@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react'
 import Link from "next/link"
 import {useForm} from "react-hook-form"
 import $ from "jquery"
-import PopupThanks from "../contacto/popup-thanks"
 import Config from "../../config"
 import FormPayment from "../../components/form-payment"
 import axios from "axios"
@@ -63,13 +62,7 @@ const AutorizacionViaje = (props) => {
     
     return (
 
-        <>            
-            { showForm && (
-                <PopupThanks eClick={triggerClosePopup}>
-                    <h3 className="title">¡Gracias!</h3>
-                    <p className="description">Gracias por ponerte en contacto con <strong>Notaría Román.</strong> <br />Uno de nuestros asesores se comunicará con usted a la brevedad.</p>
-                </PopupThanks>
-            )}
+        <>                        
 
             <div className="section tramite-form with-bg-img">
 
