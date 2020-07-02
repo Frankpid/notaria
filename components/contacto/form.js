@@ -91,6 +91,7 @@ const Form = (props) => {
             data: sendValue
         })
         .then(function (response) {
+            document.getElementsByTagName("form")[0].reset()
             setShowForm(true)        
             //console.log(response)
         })
