@@ -42,9 +42,8 @@ const FortilitiesList = (props) => {
     }
 
     const dataList = dataFormalities.map((item, index)=>{
-        return <FormalitiesListItem key={index} data={item} />
+        return <FormalitiesListItem typeLink={props.typeLink} key={index} data={item} />
     })
-
 
     return (
         <div className="section formalities-list list-type-1"> 

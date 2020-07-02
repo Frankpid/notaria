@@ -4,7 +4,7 @@ import Slider from "react-slick"
 import Link from "next/link"
 import Config from "../config"
 
-const FortilitiesListItem = (props) =>{     
+const FortilitiesListItem = (props) =>{
     
     const img = props.data.img.length>2 ? JSON.parse(props.data.img)[0] : ''
     const folder = props.data.folder
@@ -18,7 +18,7 @@ const FortilitiesListItem = (props) =>{
                         <h2><strong>{props.data.title}</strong></h2>
                     </div>
                     <p className="description">{props.data.description}</p>
-                    <Link href={'tramites-en-linea/' + props.data.link}>
+                    <Link href={props.typeLink == 2 ? '../../tramites-en-linea/' + props.data.link : 'tramites-en-linea/' + props.data.link}>
                         <a className="button-link">Solicitar trámite</a>
                     </Link>                    
                 </div>

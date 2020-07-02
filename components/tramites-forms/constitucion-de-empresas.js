@@ -5,6 +5,7 @@ import $ from "jquery"
 import PopupThanks from "../contacto/popup-thanks"
 import Config from "../../config"
 import FormPayment from "../../components/form-payment"
+import axios from "axios"
 
 
 const ConstitucionEmpresas = (props) => {
@@ -12,6 +13,12 @@ const ConstitucionEmpresas = (props) => {
     const {register, errors, handleSubmit} = useForm()
     const [showForm, setShowForm] = useState(false)
     const [formBody, setFormBody] = useState(true)
+
+    const [fileImg, setFileImg] = useState([])
+    const [countFile, setCountFile] = useState([])
+
+    const [fileImg2, setFileImg2] = useState([])
+    const [countFile2, setCountFile2] = useState([])
 
 
     useEffect(() => {
@@ -39,285 +46,104 @@ const ConstitucionEmpresas = (props) => {
 
     }, [])
 
+    const alphanumericValues = (str) => {
+        return str
+        .toString()                     // Cast to string
+        .toLowerCase()                  // Convert the string to lowercase letters
+        .normalize('NFD')       // The normalize() method returns the Unicode Normalization Form of a given string.
+        .trim()                         // Remove whitespace from both sides of a string
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-') 
+    }
 
-    const onSubmit = data => {        
-        setShowForm(true)
-        alert(JSON.stringify(data))
+    const formReset = () => {
+        setFileImg([])
+        setCountFile([])
+        //document.querySelector("#form-data").reset()
+        document.getElementsByTagName("form")[0].reset()
+        document.querySelector('#comprobante_img_place').innerHTML = "Adjuntar voucher" 
+        document.querySelector('#sle_estatuto_place').innerHTML = "Adjuntar archivo" 
+    }
+
+    const fileOnChange = (e) => {   
+        if( e.target.files.length>0 ){   
+            let newNameDate = new Date().getTime()
+            let file = e.target.files[0]
+            let newName1 = file.name.split('.').shift()
+            let newName = alphanumericValues(newName1)
+            let blob = file.slice(0, file.size, file.type) 
+            let newFile = new File([blob], newName + '-' + newNameDate + '.' + file.type.split('/')[1], {type: file.type})
+                
+            document.getElementById('comprobante_img_place').innerHTML = e.target.value.split(/(\\|\/)/g).pop()
+            setFileImg(newFile)   
+            setCountFile([...countFile, newName])
+            document.querySelector('#name_img').value = newName + '-' + newNameDate + '.' + file.type.split('/')[1]   
+        }                    
+    }
+
+    const fileOnChange2 = (e) => { 
+        if( e.target.files.length>0 ){     
+            let newNameDate = new Date().getTime()
+            let file = e.target.files[0]
+            let newName1 = file.name.split('.').shift()
+            let newName = alphanumericValues(newName1)
+            let blob = file.slice(0, file.size, file.type) 
+            let newFile = new File([blob], newName + '-' + newNameDate + '.' + file.type.split('/')[1], {type: file.type})
+
+            console.log(newFile)
+                
+            document.getElementById('sle_estatuto_place').innerHTML = e.target.value.split(/(\\|\/)/g).pop()
+            setFileImg2(newFile)   
+            setCountFile2([...countFile2, newName])
+            document.querySelector('#name_img_2').value = newName + '-' + newNameDate + '.' + file.type.split('/')[1]    
+        }                   
+    }
+
+    const onSubmit = data => {    
+
+        console.log(data)
+    
+        //return false
+
+        if( countFile.length>0 ){                        
+            var formData = new FormData()   
+
+            if( countFile2.length>0 ){
+                formData.append("demo", fileImg2)
+            }
+
+            formData.append("demo", fileImg)            
+
+            axios.post(Config.URL_BACK + '/upload-only-img', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(res => {
+                console.log('Exito')                
+            }).catch(err => {
+                console.error('Error')
+            })
+        }
+
+        let sendValue = data
+
+        axios({
+            method: 'post',
+            url: Config.API_PATH + '/p-ce',
+            data: sendValue
+        })
+        .then(function (response) {
+            setShowForm(true)
+            formReset()
+        })
+        
     }
     
     const triggerClosePopup = () => {
         setShowForm(false)
     }
-    
-    
-    const ViajeInternacionalForm = <>
-
-        <div className="form-text-line">Datos del padre</div>  
-
-        <div className="box-form">
-            <label htmlFor="dp_nombre1">Nombres completos:</label>
-            <input type="text" id="dp_nombre1" name="dp_nombre1" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dp_nombre1 && <span className="fi-validator">{errors.dp_nombre1.message}</span>}
-        </div> 
-
-        <div className="box-form">
-            <label htmlFor="dp_nacionalidad">Nacionalidad</label>
-            <input type="text" id="dp_nacionalidad" name="dp_nacionalidad" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dp_nacionalidad && <span className="fi-validator">{errors.dp_nacionalidad.message}</span>}
-        </div>    
-                                        
-        <div className="group-form">
-
-            <div className="g-form-col g-form-col-2 g-form-col-2-type-1">
-
-                <p className="box-form">
-                    <label htmlFor="dp_tipo_doc">Tipo de documento:</label>
-                    <select 
-                    className="form-item"
-                    name="dp_tipo_doc"
-                    onChange={(e) => document.getElementById('numDoc1').focus()}
-                    ref={register({
-                        required: "Este campo es obligatorio"
-                    })}>
-                        <option defaultValue={true} value="1">DNI</option>
-                        <option value="2">Carnet de extranjeria</option>
-                        <option value="3">Pasaporte</option>
-                    </select>
-                    {errors.dp_tipo_doc && <span className="fi-validator">{errors.dp_tipo_doc.message}</span>}
-                </p>
-
-                <p className="box-form">
-                    <label htmlFor="dp_num_doc">Número de Documento</label>
-                    <input type="text" id="dp_num_doc" name="dp_num_doc" className="form-item"                                                 
-                    ref={register({required: "Apellidos es obligatorio"})} />
-                    {errors.dp_num_doc && <span className="fi-validator">{errors.dp_num_doc.message}</span>}
-                </p>
-
-            </div>
-
-        </div>
-
-        <div className="box-form">
-            <label htmlFor="dp_domicilio">Domicilio:</label>
-            <input type="text" id="dp_domicilio" name="dp_domicilio" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dp_domicilio && <span className="fi-validator">{errors.dp_domicilio.message}</span>}
-        </div>
-
-
-
-        <div className="form-text-line">Datos del madre</div>  
-
-        <div className="box-form">
-            <label htmlFor="dma_nombre">Nombres completos:</label>
-            <input type="text" id="dma_nombre" name="dma_nombre" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dma_nombre && <span className="fi-validator">{errors.dma_nombre.message}</span>}
-        </div> 
-
-        <div className="box-form">
-            <label htmlFor="dma_nacionalidad">Nacionalidad</label>
-            <input type="text" id="dma_nacionalidad" name="dma_nacionalidad" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dma_nacionalidad && <span className="fi-validator">{errors.dma_nacionalidad.message}</span>}
-        </div>    
-                                        
-        <div className="group-form">
-
-            <div className="g-form-col g-form-col-2 g-form-col-2-type-1">
-
-                <p className="box-form">
-                    <label htmlFor="dma_tipo_doc">Tipo de documento:</label>
-                    <select 
-                    className="form-item"
-                    name="dma_tipo_doc"
-                    onChange={(e) => document.getElementById('numDoc').focus()}
-                    ref={register({
-                        required: "Este campo es obligatorio"
-                    })}>
-                        <option defaultValue={true} value="1">DNI</option>
-                        <option value="2">Carnet de extranjeria</option>
-                        <option value="3">Pasaporte</option>
-                    </select>
-                    {errors.dma_tipo_doc && <span className="fi-validator">{errors.dma_tipo_doc.message}</span>}
-                </p>
-
-                <p className="box-form">
-                    <label htmlFor="dma_num_doc">Número de Documento</label>
-                    <input type="text" id="dma_num_doc" name="dma_num_doc" className="form-item"                                                 
-                    ref={register({required: "Apellidos es obligatorio"})} />
-                    {errors.dma_num_doc && <span className="fi-validator">{errors.dma_num_doc.message}</span>}
-                </p>
-
-            </div>
-
-        </div>
-
-        <div className="box-form">
-            <label htmlFor="dma_domicilio">Domicilio:</label>
-            <input type="text" id="dma_domicilio" name="dma_domicilio" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dma_domicilio && <span className="fi-validator">{errors.dma_domicilio.message}</span>}
-        </div>
-
-
-
-        <div className="form-text-line">Datos del menor</div>
-
-        <div className="box-form">
-            <label htmlFor="dm_nombre">Nombres completos:</label>
-            <input type="text" id="dm_nombre" name="dm_nombre" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dm_nombre && <span className="fi-validator">{errors.dm_nombre.message}</span>}
-        </div> 
-
-        <div className="group-form">
-
-            <div className="g-form-col g-form-col-2 g-form-col-2-type-1">
-
-                <p className="box-form">
-                    <label htmlFor="dm_edad">Edad:</label>
-                    <select 
-                    className="form-item"
-                    name="dm_edad"
-                    ref={register({
-                        required: "Este campo es obligatorio"
-                    })}>
-                        <option defaultValue={true} value="0">Menor a 1 año</option>
-                        {Array.apply(1, Array(17)).map(function (x, i) {
-                            return <option key={i+1} value={i+1}>{i+1 <= 9 ? '0' + (i+1) + ' años' : (i+1) + ' años'}</option>
-                        })}
-                    </select>
-                    {errors.dm_edad && <span className="fi-validator">{errors.dm_edad.message}</span>}
-                </p>
-
-            </div>
-
-        </div>
-
-
-
-        <div className="form-text-line">Datos del viaje</div>
-
-        <div className="box-form">
-            <label htmlFor="dv_lugar_viaje">Lugar del viaje:</label>
-            <input type="text" id="dv_lugar_viaje" name="dv_lugar_viaje" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dv_lugar_viaje && <span className="fi-validator">{errors.dv_lugar_viaje.message}</span>}
-        </div> 
-
-        <div className="box-form">
-            <label htmlFor="dv_duracion">Duración:</label>
-            <input type="text" id="dv_duracion" name="dv_duracion" className="form-item"                                         
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dv_duracion && <span className="fi-validator">{errors.dv_duracion.message}</span>}
-        </div> 
-
-        <div className="box-form">
-            <label htmlFor="dv_observaciones">Observaciones:</label>
-            <input type="text" id="dv_observaciones" name="dv_observaciones" className="form-item" 
-            placeholder="Detalle con quién viaja y otros"                                        
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dv_observaciones && <span className="fi-validator">{errors.dv_observaciones.message}</span>}
-        </div> 
-
-
-
-        <div className="form-text-line">Datos de contacto</div>
-
-        <div className="box-form">
-            <label htmlFor="dc_nombre">Nombres completos:</label>
-            <input type="text" id="dc_nombre" name="dc_nombre" className="form-item" 
-            onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dc_nombre && <span className="fi-validator">{errors.dc_nombre.message}</span>}
-        </div> 
-
-        <div className="box-form">
-            <label htmlFor="dc_telefono">Teléfonos:</label>
-            <input type="text" id="dc_telefono" name="dc_telefono" className="form-item"
-            onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]+/ig, '')}                                          
-            ref={register({
-                required: "Este campo es obligatorio"
-            })}
-            />
-            {errors.dc_telefono && <span className="fi-validator">{errors.dc_telefono.message}</span>}
-        </div> 
-
-        <div className="box-form">
-            <label htmlFor="dc_email">Email:</label>
-            <input type="text" id="dc_email" name="dc_email" className="form-item" 
-            placeholder="Detalle con quién viaja y otros"                                        
-            ref={register({
-                required: "Este campo es obligatorio",
-                pattern: {
-                    value: /^(([^<>()\[\]\\.,;:\s@"]+(\.[^<>()\[\]\\.,;:\s@"]+)*)|(".+"))@((\[[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\.[0-9]{1,3}\])|(([a-zA-Z\-0-9]+\.)+[a-zA-Z]{2,}))$/,
-                    message: "Ingresar un Email valido"
-                }
-            })}
-            />
-            {errors.dc_email && <span className="fi-validator">{errors.dc_email.message}</span>}
-        </div> 
-
-        <FormPayment />
-
-        <div className="box-form box-file-img">
-            <div className="title">Comprobante de pago (opcional):</div>
-            <label className="form-item" id="comprobante_img_place" htmlFor="comprobante_img">Adjuntar voucher</label>
-            <input type="file" id="comprobante_img" name="comprobante_img" className="form-item" placeholder="Detalle con quién viaja y otros" 
-            accept=".jpg, .jpeg, .png"
-            onChange={(e) => document.getElementById('comprobante_img_place').innerHTML = e.target.value.split(/(\\|\/)/g).pop()}
-            />            
-        </div>
-
-
-        <button type="submit" className="button">Enviar trámite</button>
-
-    </>
-
 
     
     return (
@@ -342,6 +168,18 @@ const ConstitucionEmpresas = (props) => {
                             <form onSubmit={handleSubmit(onSubmit)}>
 
                                 <div className="block-form">  
+
+                                    <input type="hidden" id="name_img" name="name_img" 
+                                    ref={register({
+                                        required: false
+                                    })}
+                                    />
+
+                                    <input type="hidden" id="name_img_2" name="name_img_2" 
+                                    ref={register({
+                                        required: false
+                                    })}
+                                    />
 
                                     <div className="box-form">
                                         <label htmlFor="tipo_sociedad">Por favor selecciona el <strong>tipo de sociedad:</strong></label>
@@ -407,7 +245,7 @@ const ConstitucionEmpresas = (props) => {
                                                 <select 
                                                 className="form-item"
                                                 name="co1_tipo_doc"
-                                                onChange={(e) => document.getElementById('numDoc1').focus()}
+                                                onChange={(e) => document.getElementById('co1_num_doc').focus()}
                                                 ref={register({
                                                     required: "Este campo es obligatorio"
                                                 })}>
@@ -440,8 +278,9 @@ const ConstitucionEmpresas = (props) => {
                                         })}>
                                             <option hidden value="">Seleccione un estado</option>
                                             <option value="1">Soltero</option>
-                                            <option value="2">Casado o divorciado</option>
-                                            <option value="3">Viudo</option>
+                                            <option value="2">Casado</option>
+                                            <option value="3">divorciado</option>
+                                            <option value="4">Viudo</option>
                                         </select>
                                         {errors.co1_estado_civil && <span className="fi-validator">{errors.co1_estado_civil.message}</span>}
                                     </div>
@@ -459,8 +298,7 @@ const ConstitucionEmpresas = (props) => {
 
                                     <div className="box-form">
                                         <label htmlFor="co1_direccion">Dirección</label>
-                                        <input type="text" id="co1_direccion" name="co1_direccion" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        <input type="text" id="co1_direccion" name="co1_direccion" className="form-item"                                         
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -482,7 +320,11 @@ const ConstitucionEmpresas = (props) => {
                                     <div className="box-form">
                                         <label htmlFor="co1_conyuge">Cónyuge (opcional):</label>
                                         <input type="text" id="co1_conyuge" name="co1_conyuge" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}/>                                        
+                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        ref={register({
+                                            required: false
+                                        })}
+                                        />                                        
                                     </div> 
 
                                     
@@ -503,7 +345,11 @@ const ConstitucionEmpresas = (props) => {
                                     <div className="box-form">
                                         <label htmlFor="sle_sigla">Sigla (opcional):</label>
                                         <input type="text" id="sle_sigla" name="sle_sigla" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}/>                                        
+                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        ref={register({
+                                            required: false
+                                        })}
+                                        />                                        
                                     </div>
 
                                     <div className="box-form">
@@ -558,7 +404,7 @@ const ConstitucionEmpresas = (props) => {
                                                 <select 
                                                 className="form-item"
                                                 name="sle_tipo_doc"
-                                                onChange={(e) => document.getElementById('numDoc1').focus()}
+                                                onChange={(e) => document.getElementById('sle_num_doc').focus()}
                                                 ref={register({
                                                     required: "Este campo es obligatorio"
                                                 })}>
@@ -584,7 +430,7 @@ const ConstitucionEmpresas = (props) => {
                                         <div className="title">Estatuto de la empresa:</div>
                                         <label className="form-item" id="sle_estatuto_place" htmlFor="sle_estatuto">Adjuntar archivo</label>
                                         <input type="file" id="sle_estatuto" name="sle_estatuto" className="form-item" accept=".doc, .jpg, .jpeg, .pdf"
-                                        onChange={(e) => document.getElementById('sle_estatuto_place').innerHTML = e.target.value.split(/(\\|\/)/g).pop()}
+                                        onChange={(e) => fileOnChange2(e)}
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -641,7 +487,7 @@ const ConstitucionEmpresas = (props) => {
                                         <label className="form-item" id="comprobante_img_place" htmlFor="comprobante_img">Adjuntar voucher</label>
                                         <input type="file" id="comprobante_img" name="comprobante_img" className="form-item" placeholder="Detalle con quién viaja y otros" 
                                         accept=".jpg, .jpeg, .png"
-                                        onChange={(e) => document.getElementById('comprobante_img_place').innerHTML = e.target.value.split(/(\\|\/)/g).pop()}
+                                        onChange={(e) => fileOnChange(e)}
                                         />            
                                     </div>
 

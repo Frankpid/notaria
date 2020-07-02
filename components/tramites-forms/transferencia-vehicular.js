@@ -5,6 +5,7 @@ import $ from "jquery"
 import PopupThanks from "../contacto/popup-thanks"
 import Config from "../../config"
 import FormPayment from "../../components/form-payment"
+import axios from "axios"
 
 
 const TransferenciaVehicular = (props) => {
@@ -14,6 +15,9 @@ const TransferenciaVehicular = (props) => {
     const [formBody, setFormBody] = useState(true)
     const [showDataCasado, setShowDataCasado] = useState(false)
     const [showDataCasado2, setShowDataCasado2] = useState(false)
+
+    const [fileImg, setFileImg] = useState([])
+    const [countFile, setCountFile] = useState([])
 
 
     useEffect(() => {
@@ -42,9 +46,74 @@ const TransferenciaVehicular = (props) => {
     }, [])
 
 
-    const onSubmit = data => {        
-        setShowForm(true)
-        alert(JSON.stringify(data))
+    const alphanumericValues = (str) => {
+        return str
+        .toString()                     // Cast to string
+        .toLowerCase()                  // Convert the string to lowercase letters
+        .normalize('NFD')       // The normalize() method returns the Unicode Normalization Form of a given string.
+        .trim()                         // Remove whitespace from both sides of a string
+        .replace(/\s+/g, '-')           // Replace spaces with -
+        .replace(/[^\w\-]+/g, '')       // Remove all non-word chars
+        .replace(/\-\-+/g, '-') 
+    }
+
+    const formReset = () => {
+        setFileImg([])
+        setCountFile([])
+        //document.querySelector("#form-data").reset()
+        document.getElementsByTagName("form")[0].reset()
+        document.querySelector('#comprobante_img_place').innerHTML = "Adjuntar voucher"         
+    }
+
+    const fileOnChange = (e) => {   
+        if( e.target.files.length>0 ){   
+            let newNameDate = new Date().getTime()
+            let file = e.target.files[0]
+            let newName1 = file.name.split('.').shift()
+            let newName = alphanumericValues(newName1)
+            let blob = file.slice(0, file.size, file.type) 
+            let newFile = new File([blob], newName + '-' + newNameDate + '.' + file.type.split('/')[1], {type: file.type})
+                
+            document.getElementById('comprobante_img_place').innerHTML = e.target.value.split(/(\\|\/)/g).pop()
+            setFileImg(newFile)   
+            setCountFile([...countFile, newName])
+            document.querySelector('#name_img').value = newName + '-' + newNameDate + '.' + file.type.split('/')[1]   
+        }                    
+    }
+
+
+    const onSubmit = data => {    
+        console.log(data)    
+        //return false
+        if( countFile.length>0 ){                        
+            var formData = new FormData()   
+
+            formData.append("demo", fileImg)            
+
+            axios.post(Config.URL_BACK + '/upload-only-img', formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data'
+                }
+            })
+            .then(res => {
+                console.log('Exito')                
+            }).catch(err => {
+                console.error('Error')
+            })
+        }
+
+        let sendValue = data
+
+        axios({
+            method: 'post',
+            url: Config.API_PATH + '/p-tv',
+            data: sendValue
+        })
+        .then(function (response) {
+            setShowForm(true)
+            formReset()
+        })
+        
     }
     
     const triggerClosePopup = () => {
@@ -76,7 +145,13 @@ const TransferenciaVehicular = (props) => {
 
                                 <div className="block-form">  
 
-                                    <div className="form-text-line">Vendedor:</div> 
+                                    <input type="hidden" id="name_img" name="name_img" 
+                                    ref={register({
+                                        required: false
+                                    })}
+                                    />
+
+                                    <div style={{marginTop: 20}} className="form-text-line">Vendedor:</div> 
 
                                     <div className="box-form">
                                         <label htmlFor="ven_tipo_poder">Tipo de persona:</label>
@@ -96,8 +171,7 @@ const TransferenciaVehicular = (props) => {
 
                                     <div className="box-form">
                                         <label htmlFor="ven_ruc">RUC:</label>
-                                        <input type="text" id="ven_ruc" name="ven_ruc" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        <input type="text" id="ven_ruc" name="ven_ruc" className="form-item"                                         
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -107,8 +181,7 @@ const TransferenciaVehicular = (props) => {
 
                                     <div className="box-form">
                                         <label htmlFor="ven_partida">Partida registral:</label>
-                                        <input type="text" id="ven_partida" name="ven_partida" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        <input type="text" id="ven_partida" name="ven_partida" className="form-item"                                         
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -147,7 +220,7 @@ const TransferenciaVehicular = (props) => {
                                                 <select 
                                                 className="form-item"
                                                 name="ven_tipo_doc"
-                                                onChange={(e) => document.getElementById('numDoc1').focus()}
+                                                onChange={(e) => document.getElementById('ven_num_doc').focus()}
                                                 ref={register({
                                                     required: "Este campo es obligatorio"
                                                 })}>
@@ -182,8 +255,7 @@ const TransferenciaVehicular = (props) => {
 
                                     <div className="box-form">
                                         <label htmlFor="ven_domicilio">Domicilio:</label>
-                                        <input type="text" id="ven_domicilio" name="ven_domicilio" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        <input type="text" id="ven_domicilio" name="ven_domicilio" className="form-item"                                         
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -232,7 +304,7 @@ const TransferenciaVehicular = (props) => {
                                                         <select 
                                                         className="form-item"
                                                         name="ven_tipo_doc_conyuge"
-                                                        onChange={(e) => document.getElementById('numDoc1').focus()}
+                                                        onChange={(e) => document.getElementById('ven_num_doc_conyuge').focus()}
                                                         ref={register({
                                                             required: "Este campo es obligatorio"
                                                         })}>
@@ -292,8 +364,7 @@ const TransferenciaVehicular = (props) => {
 
                                     <div className="box-form">
                                         <label htmlFor="com_ruc">RUC:</label>
-                                        <input type="text" id="com_ruc" name="com_ruc" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        <input type="text" id="com_ruc" name="com_ruc" className="form-item"                                         
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -303,8 +374,7 @@ const TransferenciaVehicular = (props) => {
 
                                     <div className="box-form">
                                         <label htmlFor="com_partida">Partida registral:</label>
-                                        <input type="text" id="com_partida" name="com_partida" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        <input type="text" id="com_partida" name="com_partida" className="form-item"                                         
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -343,7 +413,7 @@ const TransferenciaVehicular = (props) => {
                                                 <select 
                                                 className="form-item"
                                                 name="com_tipo_doc"
-                                                onChange={(e) => document.getElementById('numDoc1').focus()}
+                                                onChange={(e) => document.getElementById('com_num_doc').focus()}
                                                 ref={register({
                                                     required: "Este campo es obligatorio"
                                                 })}>
@@ -378,8 +448,7 @@ const TransferenciaVehicular = (props) => {
 
                                     <div className="box-form">
                                         <label htmlFor="com_domicilio">Domicilio:</label>
-                                        <input type="text" id="com_domicilio" name="com_domicilio" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                        <input type="text" id="com_domicilio" name="com_domicilio" className="form-item"                                         
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -428,7 +497,7 @@ const TransferenciaVehicular = (props) => {
                                                         <select 
                                                         className="form-item"
                                                         name="com_tipo_doc_conyuge"
-                                                        onChange={(e) => document.getElementById('numDoc1').focus()}
+                                                        onChange={(e) => document.getElementById('com_num_doc_conyuge').focus()}
                                                         ref={register({
                                                             required: "Este campo es obligatorio"
                                                         })}>
@@ -554,7 +623,8 @@ const TransferenciaVehicular = (props) => {
 
                                     <div className="box-form">
                                         <label htmlFor="dv_ano_fabricacion">Año de Fabricación:</label>
-                                        <input type="text" id="dv_ano_fabricacion" name="dv_ano_fabricacion" className="form-item"                                         
+                                        <input type="text" id="dv_ano_fabricacion" name="dv_ano_fabricacion" className="form-item" 
+                                        onInput={(e) => e.target.value = e.target.value.replace(/[^0-9]+/ig, '')}                                       
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}
@@ -687,7 +757,7 @@ const TransferenciaVehicular = (props) => {
                                         <label className="form-item" id="comprobante_img_place" htmlFor="comprobante_img">Adjuntar voucher</label>
                                         <input type="file" id="comprobante_img" name="comprobante_img" className="form-item" placeholder="Detalle con quién viaja y otros" 
                                         accept=".jpg, .jpeg, .png"
-                                        onChange={(e) => document.getElementById('comprobante_img_place').innerHTML = e.target.value.split(/(\\|\/)/g).pop()}
+                                        onChange={(e) => fileOnChange(e)}
                                         />            
                                     </div>
 

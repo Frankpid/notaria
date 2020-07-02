@@ -26,7 +26,7 @@ const ServicioCat = (props) => {
     const capitalize = (s) => {        
         return s.charAt(0).toUpperCase() + s.slice(1)
     }
-    
+
     const dataCurrent = <>
         <div className="header-parent-title flex middle-xs between-md">        
             <h2>{capitalize(props.getDataServicio[0]['data'][0]['nombre'])}</h2>
@@ -110,7 +110,7 @@ const ServicioCat = (props) => {
 
             <Detail class={"detail-style-1 service-detail"} dataList={doNavLateral} dataContent={dataCurrent} />
 
-            <FormalitiesList data={dataTramite} />
+            <FormalitiesList typeLink={2} data={props.listTramiteShort} />
 
         </Container>
     )
@@ -124,12 +124,14 @@ ServicioCat.getInitialProps = async (ctx) => {
     let currentUrl = ctx.query.detalle
 
     const getServiciosShort = await axios(Config.API_PATH + '/servicios-short')  
-    const getDataServicio = await axios(Config.API_PATH + '/servicio-article?catid='+catNameUrl+'&id='+currentUrl)   
+    const getDataServicio = await axios(Config.API_PATH + '/servicio-article?catid='+catNameUrl+'&id='+currentUrl)
+    const getTramiteShort = await axios(Config.API_PATH + '/tramite-short')   
     return {
         catNameUrl: catNameUrl,
         currentUrl: currentUrl,
         listServiciosShort: getServiciosShort.data.listCategoriasShort,
-        getDataServicio: getDataServicio.data.dataServicio
+        getDataServicio: getDataServicio.data.dataServicio,
+        listTramiteShort: getTramiteShort.data.listTramite,
     }
 }
 
