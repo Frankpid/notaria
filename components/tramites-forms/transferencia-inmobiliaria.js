@@ -12,8 +12,10 @@ const TransferenciaInmobiliaria = (props) => {
 
     const {register, errors, handleSubmit} = useForm()
 
-    const [showForm, setShowForm] = useState(false)
+    const [showForm, setShowForm] = useState(false)    
+
     const [formBody, setFormBody] = useState(true)
+    const [formBody2, setFormBody2] = useState(true)
 
     const [showDataCasado, setShowDataCasado] = useState(false)
     const [showDataCasado2, setShowDataCasado2] = useState(false)
@@ -132,7 +134,9 @@ const TransferenciaInmobiliaria = (props) => {
             { showForm && (
                 <PopupThanks eClick={triggerClosePopup}>
                     <h3 className="title">¡Gracias!</h3>
-                    <p className="description">Gracias por ponerte en contacto con <strong>Notaría Román.</strong> <br />Uno de nuestros asesores se comunicará con usted a la brevedad.</p>
+                    <p className="description">
+                        Hemos recibido la solicitud de su trámite, Transferencia inmobiliaria. Uno de nuestros asesores legales se comunicará usted a la brevedad para continuar con el proceso. Te estaremos contactando pronto. No olvide revisar su cuenta de email (bandeja de entrada y o Spam) en donde le hemos enviado toda la información que nos ha proporcionado. Si tiene otra consulta puede llamar a nuestra central telefónica (01) 7151588 que estaremos gustosos en atenderlo.
+                    </p>
                 </PopupThanks>
             )}
 
@@ -173,36 +177,40 @@ const TransferenciaInmobiliaria = (props) => {
                                         {errors.ven_tipo_persona && <span className="fi-validator">{errors.ven_tipo_persona.message}</span>}
                                     </div>  
 
-                                    <div className="box-form">
-                                        <label htmlFor="ven_ruc">RUC:</label>
-                                        <input type="text" id="ven_ruc" name="ven_ruc" className="form-item"                                        
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.ven_ruc && <span className="fi-validator">{errors.ven_ruc.message}</span>}
-                                    </div>  
+                                    { !formBody && (
+                                        <>
+                                            <div className="box-form">
+                                                <label htmlFor="ven_ruc">RUC:</label>
+                                                <input type="text" id="ven_ruc" name="ven_ruc" className="form-item"                                        
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.ven_ruc && <span className="fi-validator">{errors.ven_ruc.message}</span>}
+                                            </div>  
 
-                                    <div className="box-form">
-                                        <label htmlFor="ven_partida">Partida registral:</label>
-                                        <input type="text" id="ven_partida" name="ven_partida" className="form-item"                                         
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.ven_partida && <span className="fi-validator">{errors.ven_partida.message}</span>}
-                                    </div> 
+                                            <div className="box-form">
+                                                <label htmlFor="ven_partida">Partida registral:</label>
+                                                <input type="text" id="ven_partida" name="ven_partida" className="form-item"                                         
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.ven_partida && <span className="fi-validator">{errors.ven_partida.message}</span>}
+                                            </div> 
 
-                                    <div className="box-form">
-                                        <label htmlFor="ven_lugar">Lugar de inscripción:</label>
-                                        <input type="text" id="ven_lugar" name="ven_lugar" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.ven_lugar && <span className="fi-validator">{errors.ven_lugar.message}</span>}
-                                    </div>                                                                                                                                         
+                                            <div className="box-form">
+                                                <label htmlFor="ven_lugar">Lugar de inscripción:</label>
+                                                <input type="text" id="ven_lugar" name="ven_lugar" className="form-item" 
+                                                onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.ven_lugar && <span className="fi-validator">{errors.ven_lugar.message}</span>}
+                                            </div>  
+                                        </>
+                                    )}                                                                                                                                       
 
                                     <div className="box-form">
                                         <label htmlFor="ven_nombre">Nombre completo:</label>
@@ -357,7 +365,7 @@ const TransferenciaInmobiliaria = (props) => {
                                         className="form-item"
                                         name="com_tipo_persona"
                                         id="com_tipo_persona"
-                                        onChange={(e) => setFormBody(formBody ? false : true)}
+                                        onChange={(e) => setFormBody2(formBody2 ? false : true)}
                                         ref={register({
                                             required: "Este campo es obligatorio"
                                         })}>
@@ -367,37 +375,41 @@ const TransferenciaInmobiliaria = (props) => {
                                         {errors.com_tipo_persona && <span className="fi-validator">{errors.com_tipo_persona.message}</span>}
                                     </div>  
 
-                                    <div className="box-form">
-                                        <label htmlFor="com_ruc">RUC:</label>
-                                        <input type="text" id="com_ruc" name="com_ruc" className="form-item"                                         
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.com_ruc && <span className="fi-validator">{errors.com_ruc.message}</span>}
-                                    </div>  
+                                    { !formBody2 && (
+                                        <>
+                                            <div className="box-form">
+                                                <label htmlFor="com_ruc">RUC:</label>
+                                                <input type="text" id="com_ruc" name="com_ruc" className="form-item"                                         
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.com_ruc && <span className="fi-validator">{errors.com_ruc.message}</span>}
+                                            </div>  
 
-                                    <div className="box-form">
-                                        <label htmlFor="com_partida">Partida registral:</label>
-                                        <input type="text" id="com_partida" name="com_partida" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.com_partida && <span className="fi-validator">{errors.com_partida.message}</span>}
-                                    </div> 
+                                            <div className="box-form">
+                                                <label htmlFor="com_partida">Partida registral:</label>
+                                                <input type="text" id="com_partida" name="com_partida" className="form-item" 
+                                                onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.com_partida && <span className="fi-validator">{errors.com_partida.message}</span>}
+                                            </div> 
 
-                                    <div className="box-form">
-                                        <label htmlFor="com_lugar">Lugar de inscripción:</label>
-                                        <input type="text" id="com_lugar" name="com_lugar" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.com_lugar && <span className="fi-validator">{errors.com_lugar.message}</span>}
-                                    </div>                                                                                                                                         
+                                            <div className="box-form">
+                                                <label htmlFor="com_lugar">Lugar de inscripción:</label>
+                                                <input type="text" id="com_lugar" name="com_lugar" className="form-item" 
+                                                onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.com_lugar && <span className="fi-validator">{errors.com_lugar.message}</span>}
+                                            </div>  
+                                        </>
+                                    )}                                                                                                                                       
 
                                     <div className="box-form">
                                         <label htmlFor="com_nombre">Nombre completo:</label>
@@ -567,7 +579,7 @@ const TransferenciaInmobiliaria = (props) => {
                                         </select>
                                         {errors.di_cantidad && <span className="fi-validator">{errors.di_cantidad.message}</span>}
 
-                                        <div className="form-message">Por favor ingrese los datos de cada inmueble</div>
+                                        <div className="form-message">En caso de tener más de un inmueble te solicitaremos los datos por correo.</div>
                                     </div> 
 
 

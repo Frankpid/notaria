@@ -1,4 +1,5 @@
 import React, { useState } from 'react'
+import Link from "next/link"
 
 const Accounts = (props) => {
     return (
@@ -47,8 +48,10 @@ const Accounts = (props) => {
                             <div className="parent-title-2">
                                 <h2><strong>Tu empresa en <br/>72 horas</strong></h2>
                             </div>
-                            <p className="description">Es un proceso sencillo que aprovecha las ventajas del mundo digital para acelerar la constitución de tu empresa. Llena nuestro formulario online y uno de nuestros asesores se pondrá en contacto contigo para explicarte los pasos a seguir y nuestra notaria se encarga de hacer la escritura pública de tu empresa.</p>
-                            <a className="button-link" href="#">Solicitar servicio</a>
+                            <p className="description">Es un proceso sencillo que aprovecha las ventajas del mundo digital para acelerar la constitución de tu empresa. Llena nuestro formulario online y uno de nuestros asesores se pondrá en contacto contigo para explicarte los pasos a seguir y nuestra notaria se encarga de hacer la escritura pública de tu empresa.</p>                            
+                            <Link href="/tramites-en-linea/constitucion-de-empresas">
+                                <a className="button-link">Solicitar servicio</a>
+                            </Link>
                         </div>
                     </div>
                 </div>

@@ -126,7 +126,9 @@ const Poderes = (props) => {
             { showForm && (
                 <PopupThanks eClick={triggerClosePopup}>
                     <h3 className="title">¡Gracias!</h3>
-                    <p className="description">Gracias por ponerte en contacto con <strong>Notaría Román.</strong> <br />Uno de nuestros asesores se comunicará con usted a la brevedad.</p>
+                    <p className="description">
+                        Hemos recibido la solicitud de su trámite, Poderes. Uno de nuestros asesores legales se comunicará usted a la brevedad para continuar con el proceso. Te estaremos contactando pronto. No olvide revisar su cuenta de email (bandeja de entrada y o Spam) en donde le hemos enviado toda la información que nos ha proporcionado. Si tiene otra consulta puede llamar a nuestra central telefónica (01) 7151588 que estaremos gustosos en atenderlo.
+                    </p>
                 </PopupThanks>
             )}
 

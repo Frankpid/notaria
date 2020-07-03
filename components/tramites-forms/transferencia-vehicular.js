@@ -129,7 +129,9 @@ const TransferenciaVehicular = (props) => {
             { showForm && (
                 <PopupThanks eClick={triggerClosePopup}>
                     <h3 className="title">¡Gracias!</h3>
-                    <p className="description">Gracias por ponerte en contacto con <strong>Notaría Román.</strong> <br />Uno de nuestros asesores se comunicará con usted a la brevedad.</p>
+                    <p className="description">
+                        Hemos recibido la solicitud de su trámite, Transferencia vehicular. Uno de nuestros asesores legales se comunicará usted a la brevedad para continuar con el proceso. Te estaremos contactando pronto. No olvide revisar su cuenta de email (bandeja de entrada y o Spam) en donde le hemos enviado toda la información que nos ha proporcionado. Si tiene otra consulta puede llamar a nuestra central telefónica (01) 7151588 que estaremos gustosos en atenderlo.
+                    </p>
                 </PopupThanks>
             )}
 
@@ -170,36 +172,41 @@ const TransferenciaVehicular = (props) => {
                                         {errors.ven_tipo_poder && <span className="fi-validator">{errors.ven_tipo_poder.message}</span>}
                                     </div>  
 
-                                    <div className="box-form">
-                                        <label htmlFor="ven_ruc">RUC:</label>
-                                        <input type="text" id="ven_ruc" name="ven_ruc" className="form-item"                                         
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.ven_ruc && <span className="fi-validator">{errors.ven_ruc.message}</span>}
-                                    </div>  
+                                    { !formBody && (
+                                        <>
+                                            <div className="box-form">
+                                                <label htmlFor="ven_ruc">RUC:</label>
+                                                <input type="text" id="ven_ruc" name="ven_ruc" className="form-item"                                         
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.ven_ruc && <span className="fi-validator">{errors.ven_ruc.message}</span>}
+                                            </div>  
 
-                                    <div className="box-form">
-                                        <label htmlFor="ven_partida">Partida registral:</label>
-                                        <input type="text" id="ven_partida" name="ven_partida" className="form-item"                                         
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.ven_partida && <span className="fi-validator">{errors.ven_partida.message}</span>}
-                                    </div> 
+                                            <div className="box-form">
+                                                <label htmlFor="ven_partida">Partida registral:</label>
+                                                <input type="text" id="ven_partida" name="ven_partida" className="form-item"                                         
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.ven_partida && <span className="fi-validator">{errors.ven_partida.message}</span>}
+                                            </div> 
 
-                                    <div className="box-form">
-                                        <label htmlFor="ven_lugar">Lugar de inscripción:</label>
-                                        <input type="text" id="ven_lugar" name="ven_lugar" className="form-item" 
-                                        onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
-                                        ref={register({
-                                            required: "Este campo es obligatorio"
-                                        })}
-                                        />
-                                        {errors.ven_lugar && <span className="fi-validator">{errors.ven_lugar.message}</span>}
-                                    </div>                                                                                                                                         
+                                            <div className="box-form">
+                                                <label htmlFor="ven_lugar">Lugar de inscripción:</label>
+                                                <input type="text" id="ven_lugar" name="ven_lugar" className="form-item" 
+                                                onInput={(e) => e.target.value = e.target.value.replace(/[^ a-záéíóúüñ]+/ig,"")}
+                                                ref={register({
+                                                    required: "Este campo es obligatorio"
+                                                })}
+                                                />
+                                                {errors.ven_lugar && <span className="fi-validator">{errors.ven_lugar.message}</span>}
+                                            </div>  
+                                        </>
+                                    )}                                    
+
 
                                     <div className="box-form">
                                         <label htmlFor="ven_nombre">Nombre completo:</label>
