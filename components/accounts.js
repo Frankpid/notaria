@@ -1,5 +1,6 @@
 import React, { useState } from 'react'
 import Link from "next/link"
+import Config from "../config"
 
 const Accounts = (props) => {
     return (
@@ -11,32 +12,67 @@ const Accounts = (props) => {
                         <div className="col-sm-10 col-md-10">
                             <div className="parent-title-2">
                                 <h2><strong>Nuestras cuentas</strong></h2>
-                            </div>
-                            <p className="description">Lorem Ipsum is simply dummy text of the printing and typesetting industry. Lorem Ipsum has been the industry's.</p>
+                            </div>                            
                         </div>
 
                         <div className="list-accounts">
-                            <div className="item">
-                                <img src="./img/bcp.png?v=2" alt="bcp" /> 
-                                <div className="wrapper-account">
-                                    <p>19429516317060</p>
-                                    <p>CCI: 00219412951631706093</p>
+
+
+                            <div className="payment-method-form">                                
+
+                                <div className="pmf-item pmf-item-1">
+                                    <img src={Config.URL + "/img/bcp.png?v=2"} alt={'Banco de credito'} />
+                                    <div>
+                                        <p><strong>Cuenta para pagos notariales</strong> <br/>a nombre de <strong>Manuel Alipio Roman Olivas Banco</strong></p>
+                                        <p>Cuenta corriente  / Soles / Banco de credito BCP</p>
+                                    </div>
                                 </div>
-                            </div>
-                            <div className="item">
-                                <img src="./img/bbva.png?v=2" alt="bcp" /> 
-                                <div className="wrapper-account">
-                                    <p>19429516317060</p>
-                                    <p>CCI: 00219412951631706093</p>
+
+                                <div className="parent-list">
+                                    <ul>
+                                        <li>
+                                            <span>Numero de cuenta:</span>
+                                            <strong>191-1933343-0-16</strong>
+                                        </li>
+                                        <li>
+                                            <span>Codigo de cuenta interbancario:</span>
+                                            <strong>CCI : 002-191-001933343016-53</strong>
+                                        </li>
+                                        <li>
+                                            <span>Numero de detraccion:</span>
+                                            <strong>00098075445</strong>
+                                        </li>
+                                    </ul>
                                 </div>
-                            </div>
-                            <div className="item">
-                                <img src="./img/interbank.png?v=2" alt="bcp" /> 
-                                <div className="wrapper-account">
-                                    <p>19429516317060</p>
-                                    <p>CCI: 00219412951631706093</p>
+
+
+                                <div className="pmf-item pmf-item-2">
+                                    <img src={Config.URL + "/img/bcp.png?v=2"} alt={'Banco de credito'} />
+                                    <div>
+                                        <p><strong>Cuenta para pagos a registros públicos</strong> <br/>a nombre de <strong>Manuel Alipio Roman Olivas Banco</strong></p>
+                                        <p>Cuenta corriente  / Soles / Banco de credito BCP</p>
+                                    </div>
                                 </div>
+
+                                <div className="parent-list">
+                                    <ul>
+                                        <li>
+                                            <span>Numero de cuenta:</span>
+                                            <strong>191-21358080-016</strong>
+                                        </li>
+                                        <li>
+                                            <span>Codigo de cuenta interbancario:</span>
+                                            <strong>CCI : 002-191-12135808001655</strong>
+                                        </li>
+                                    </ul>
+                                </div>
+
                             </div>
+                            
+
+
+
+
                         </div>
                     </div>
                 </div>
