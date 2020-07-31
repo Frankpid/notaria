@@ -24,14 +24,18 @@ const Slideshow = (props) => {
                         <div className="img" style={{ backgroundImage: `url(${Config.URL_BACK + '/uploads/'+ img})` }}></div>
                         <div className="caption caption-type-1 container-fluid wrapper-fluid flex center-xs">
                             <div className="col-xs-10 col-sm-10 col-md-10">
-                                <h3 className="title-1">{item.tipo_servicio}</h3>
-                                <div className="parent-title-2">
-                                    {ReactHtmlParser(item.object_titulo)}
+
+                                <div className="col-md-10 col-lg-7">
+                                    <h3 className="title-1">{item.tipo_servicio}</h3>
+                                    <div className="parent-title-2">
+                                        {ReactHtmlParser(item.object_titulo)}
+                                    </div>
+                                    <p className="description">{item.descripcion}</p>
+                                    <Link href={item.button_link}>
+                                        <a className="button-link">{item.button_name}</a>
+                                    </Link>
                                 </div>
-                                <p className="description">{item.descripcion}</p>
-                                <Link href={item.button_link}>
-                                    <a className="button-link">{item.button_name}</a>
-                                </Link>
+
                             </div>
                         </div>
                     </div>
