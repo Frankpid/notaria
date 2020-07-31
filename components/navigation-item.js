@@ -32,16 +32,27 @@ const NavigationItem = (props) => {
 
     const verifyLink = () => {        
         let res
+
         if(props.childrens.length > 0){
+
             res = <a className={verifyClass(props.class)}>
                 <span>{props.name}</span>
             </a>
+
         }else{
-            res = <Link href={props.link}>
-                <a className={verifyClass(props.class)}>
-                    <span>{props.name}</span>
-                </a>
-            </Link>
+
+            if( props.target == true ){
+                res = <a href={props.link} target="_blank" className={verifyClass(props.class)}>
+                        <span>{props.name}</span>
+                    </a>
+            }else{
+                res = <Link href={props.link}>
+                    <a className={verifyClass(props.class)}>
+                        <span>{props.name}</span>
+                    </a>
+                </Link>
+            }  
+
         }
 
         return res

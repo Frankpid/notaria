@@ -9,13 +9,15 @@ const Navigation = (props) =>{
             class: 'nav-item-home',
             name: 'Home',
             link: '/',
+            target: false,
             childrens: [                              
             ]
         },
         {
             class: '',
             name: 'Tramites en linea',
-            link: '/tramites-en-linea',            
+            link: '/tramites-en-linea',    
+            target: false,        
             childrens: [                
                 {name: 'Autorización de viaje', link: '/tramites-en-linea/autorizacion-de-viaje'},
                 {name: 'Constitución de empresas', link: '/tramites-en-linea/constitucion-de-empresas'},
@@ -27,7 +29,8 @@ const Navigation = (props) =>{
         {
             class: '',
             name: 'Servicios',
-            link: '/servicios',            
+            link: '/servicios',      
+            target: false,      
             childrens: [                
                 {name: 'Todos', link: '/servicios/todos'},                
                 {name: 'Instrumentos Protocolares', link: '/servicios/instrumentos-protocolares'},
@@ -45,21 +48,24 @@ const Navigation = (props) =>{
         {
             class: '',
             name: 'Nuestro Equipo',
-            link: '/nuestro-equipo',            
+            link: '/nuestro-equipo',
+            target: false,            
             childrens: [                              
             ]
         },
         {
             class: '',
             name: 'Consultas',
-            link: '/consultas',            
+            link: 'http://consultas.notariaroman.pe', 
+            target: true,           
             childrens: [                              
             ]
         },
         {
             class: '',
             name: 'Contacto',
-            link: '/contacto',            
+            link: '/contacto', 
+            target: false,           
             childrens: [                              
             ]
         }
@@ -96,7 +102,7 @@ const Navigation = (props) =>{
     }, [])
 
 
-    const mapData = navOptions.map((item, index) => {return <NavigationItem classActive={item.link == '/'+currentActive ? 'active' : ''} key={index} class={item.class} name={item.name} link={item.link} childrens={item.childrens} />})        
+    const mapData = navOptions.map((item, index) => {return <NavigationItem classActive={item.link == '/'+currentActive ? 'active' : ''} target={item.target} key={index} class={item.class} name={item.name} link={item.link} childrens={item.childrens} />})        
 
 
     return (
