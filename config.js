@@ -22,7 +22,7 @@ if( envm === "development" ){
 }else{	
 	dataConfig = {
 		"URL": "http://notariaroman.pe",
-		"URL_BACK": "http://notariaroman.pe:3001",
+		"URL_BACK": "http://notariaroman.pe",
 		"PORT": 3000,
 		"NODE_ENV": "production",
 		"DB_HOST": "localhost",
