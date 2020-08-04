@@ -110,7 +110,7 @@ const Form = (props) => {
                 <PopupThanks eClick={triggerClosePopup}>
                     <h3 className="title">¡Gracias!</h3>
                     <p className="description">
-                        Por ponerte en contacto con la Notaria Roma. Todas tus dudas y consultas son importantes para nosotros, uno de nuestros asesores se comunicará contigo a la brevedad y te aseguramos que contarás con una respuesta.
+                    Por ponerte en contacto con la <strong>Notaria Roman.</strong> Todas tus dudas y consultas son importantes para nosotros. Uno de nuestros asesores se comunicará contigo a la brevedad. Gracias por escribirnos.
                     </p>
                 </PopupThanks>
             )}

@@ -22,7 +22,7 @@ if( envm === "development" ){
 }else{	
 	dataConfig = {
 		"URL": "http://notariaroman.pe",
-		"URL_BACK": "http://notariaroman.pe:3001",
+		"URL_BACK": "http://admin.notariaroman.pe",
 		"PORT": 3000,
 		"NODE_ENV": "production",
 		"DB_HOST": "localhost",
@@ -35,7 +35,7 @@ if( envm === "development" ){
 		"GOOGLE_CLIENT_ID": "",
 		"GOOGLE_CLIENT_SECRET": "",
 		"SECURE": true,
-		"API_PATH": "http://notariaroman.pe:3001/getapi"
+		"API_PATH": "http://admin.notariaroman.pe/getapi"
 	}
 }
 

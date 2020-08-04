@@ -41,7 +41,7 @@ const ServicioCat = (props) => {
                         <div className="row slideshow-type-1">            
                             { 
                                 item.data.map((itemInner, index2) => {
-                                    return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6 col-xs-12'} />
+                                    return <ServiceListItem key={index2} text={2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6 col-xs-12'} />
                                 })                        
                             }                                
                         </div>         
@@ -55,7 +55,7 @@ const ServicioCat = (props) => {
                         <div className="row slideshow-type-1">            
                             { 
                                 item.data.map((itemInner, index2) => {
-                                    return <ServiceListItem key={index2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6 col-xs-12'} />
+                                    return <ServiceListItem key={index2} text={2} data={itemInner} link={item.linkCat + '/' + itemInner.linkCat} class={'col col-md-3 col-sm-6 col-xs-12'} />
                                 })                        
                             }                                
                         </div> 

@@ -9,6 +9,8 @@ const ServiceListItem = (props) => {
     const img = props.data.img_preview.length>2 ? JSON.parse(props.data.img_preview)[0] : ''
     const folder = props.data.folder
 
+    const textButton = props.text && props.text == 2 ? 'Mas Información' : 'Solicitar servicio'
+
     const capitalize = (s) => {        
         return s.charAt(0).toUpperCase() + s.slice(1)
     }
@@ -28,7 +30,7 @@ const ServiceListItem = (props) => {
                         <div className="parent-title-2"><h2>{capitalize(props.data.title)}</h2></div>
                         <p className="description">{props.data.description}</p>
                         <Link href={props.link}>
-                            <a className="button-link">Solicitar servicio</a>
+                            <a className="button-link">{textButton}</a>
                         </Link>
                     </div>
                 </div>

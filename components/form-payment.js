@@ -8,7 +8,7 @@ const FormPayment = (props) => {
     
         <div className="payment-method-form">
             <div className="form-text-line">Método de pago:</div>
-            <p style={{marginTop: 10}}>El costo de este trámite es de <strong>s/. 0.00 soles.</strong> <br />Puede realizar el pago en cualquiera de nuestras cuentas.</p>
+            <p style={{marginTop: 10}}>Puede realizar el pago en cualquiera de nuestras cuentas.</p>
 
             <div className="pmf-item pmf-item-1">
                 <img src={Config.URL + "/img/bcp.png?v=2"} alt={'Banco de credito'} />
